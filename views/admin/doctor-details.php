@@ -17,8 +17,8 @@ if($count > 0){
 			<td><?php echo $rows['email'];?></td>
 			<td><?php echo $rows['contact_number'];?></td>
 			<td><?php echo $rows['gender'];?></td>
-			<!--<td><a href="fetch-doctor-details?id=<?php //echo $rows['id'];?>"> Options</a></td>-->
-			<td><input class="edit_data" type="button" name="edit" value="Edit" id="<?php echo $rows['id'];?> "></td>
+			<!--<td><a href="views/admin/fetch-doctor-details.php?id=<?php //echo $rows['id'];?>"> Options</a></td>-->
+			<!--<td><input class="edit_data" type="button" name="edit" value="Edit" id="<?php //echo $rows['id'];?> "></td>-->
 			
 		</tr>
 

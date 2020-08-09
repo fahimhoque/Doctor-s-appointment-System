@@ -6,27 +6,16 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     echo "You need to login first to view the dashboard";
     header('Location: admin-login');
 }
-require('config.php');
-$sql = "SELECT * FROM doctor";
-$result = mysqli_query($conn, $sql);
 
-$count = mysqli_num_rows($result);
-
-
-
-$sql_patient = "SELECT * FROM patient";
-$result_patient = mysqli_query($conn, $sql_patient);
-
-$count_patient = mysqli_num_rows($result_patient);
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin Dashboard</title>
+	<title>Admin Dashboard</title>
 
     <!--Custom CSS Link-->
-    <link rel="stylesheet" type="text/css" href="views/admin/style/admin-dashboard.css">
+	<link rel="stylesheet" type="text/css" href="views/admin/style/admin-dashboard.css">
 
     <!--Bootstrap CSS CDN-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
@@ -38,7 +27,7 @@ $count_patient = mysqli_num_rows($result_patient);
     <!--Custom JS Link-->
     <script src="views/admin/scripts/patient-details.js"></script>
     <script src="views/admin/scripts/admin-dashboard.js"></script>
-    
+	
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -54,8 +43,8 @@ $count_patient = mysqli_num_rows($result_patient);
 
 </head>
 <body>
-    <!--NAVBAR-->
-    <div class="wrapper">
+	<!--NAVBAR-->
+	<div class="wrapper">
         <div class="sidebar">
             <h2>DAS Admin</h2>
             <ul>
@@ -82,7 +71,6 @@ $count_patient = mysqli_num_rows($result_patient);
 
 
                 <!--Logout-->
-                
                 <li><a href="admin-logout"><i class="fas fa-cog"></i>LogOut</button></a></li>
                 
                 
@@ -115,28 +103,7 @@ $count_patient = mysqli_num_rows($result_patient);
                     </thead>
 
                     <tbody id="response-patient">
-                        <?php  
-                               if($count_patient > 0){
-                                    while($rows_patient = mysqli_fetch_array($result_patient)){
-
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $rows_patient['id'];?> </td>
-                                            <td><?php echo $rows_patient['f_name'];?></td>
-                                            <td><?php echo $rows_patient['l_name'];?></td>
-                                            <td><?php echo $rows_patient['email'];?></td>
-                                            <td><?php echo $rows_patient['contact_number'];?></td>
-                                            <td><?php echo $rows_patient['gender'];?></td>
-                                            <!--<td><a href="fetch-doctor-details?id=<?php //echo $rows['id'];?>"> Options</a></td>-->
-                                            <td><input class="edit_data" type="button" name="edit" value="Edit" id="<?php echo $rows['id'];?> "></td>
-                                            
-                                        </tr> 
-                                        <?php
-        
-
-                                    }
-                                }
-                        ?>
+                        
                     </tbody>
 
 
@@ -166,55 +133,15 @@ $count_patient = mysqli_num_rows($result_patient);
                     </thead>
 
                     <tbody id="response-doctor">
-                        <?php  
-                               if($count > 0){
-                                    while($rows = mysqli_fetch_array($result)){
-
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $rows['id'];?> </td>
-                                            <td><?php echo $rows['f_name'];?></td>
-                                            <td><?php echo $rows['l_name'];?></td>
-                                            <td><?php echo $rows['email'];?></td>
-                                            <td><?php echo $rows['contact_number'];?></td>
-                                            <td><?php echo $rows['gender'];?></td>
-                                            <!--<td><a href="fetch-doctor-details?id=<?php //echo $rows['id'];?>"> Options</a></td>-->
-                                            <td><input class="doctor_edit_data" type="button" name="edit" value="Edit" id="<?php echo $rows['id'];?> "></td>
-                                            
-                                        </tr> 
-                                        <?php
-        
-
-                                    }
-                                }
-                        ?> 
-                       
+                        
                     </tbody>
                     
 
                 </table>
             </div>
-
-
-            <div id="dataModal" class="modal fade">  
-                <div class="modal-dialog">  
-                    <div class="modal-content">  
-                        <div class="modal-header">  
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                                <h4 class="modal-title">Doctor Details</h4>  
-                        </div>  
-                        <div class="modal-body" id="employee_detail">  
-                            
-                        </div>  
-                        <div class="modal-footer">  
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                        </div>  
-                    </div>  
-                </div>  
-            </div>
               
         </div>
-    </div>
+	</div>
 
 
 
@@ -235,44 +162,37 @@ $count_patient = mysqli_num_rows($result_patient);
 
         //For Patients
         $(document).ready(function(){
+            $("#load-patient-data").click(function(){
+                $.ajax({
+                    url: 'views/admin/patient-details.php', 
+                    type: 'POST',
+                    success: function(result){
+                        $("#response-patient").html(result);
+                    }
+                });
+            });
 
             $("#load-patient-data").click(function(){
                 $("#show-patient-details").show();
                 $("#show-doctor-details").hide();
               });
 
+            //For doctor details
             $("#load-doctor-data").click(function(){
-                
+                $.ajax({
+                    url: 'views/admin/doctor-details.php', 
+                    type: 'POST',
+                    success: function(result){
+                        $("#response-doctor").html(result);
+                    }
+                });
 
                 $("#show-doctor-details").show();
                 $("#show-patient-details").hide();
               
             });
-
-
-
-
-
-            $(document).on('click', '.doctor_edit_data', function(){  
-                   var doctor_id = $(this).attr("id");  
-                   if(doctor_id != '')  
-                   {  
-                        $.ajax({  
-                             url:"views/admin/fetch-doctor-details.php",  
-                             method:"POST",  
-                             data:{doctor_id:doctor_id},  
-                             success:function(data){  
-                                  $('#employee_detail').html(data);  
-                                  $('#dataModal').modal('show');  
-                             }  
-                        });  
-                   }            
-            });
-
-
-
-
-
+                       
+            
 
         });
 
@@ -281,3 +201,66 @@ $count_patient = mysqli_num_rows($result_patient);
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+
+require('config.php');
+
+$doctor_id = $_POST['id'];
+$sql = "SELECT id, f_name, email, gender FROM doctor WHERE id = '$doctor_id'";
+$result = mysqli_query($conn, $sql);
+
+$count = mysqli_num_rows($result);
+if($count > 0){
+    while($rows = mysqli_fetch_array($result)){
+
+        ?>
+        <h2>
+            <?php echo $rows['id'];?>
+        </h2>
+
+        <h2>
+            <?php echo $rows['f_name'];?>
+        </h2>
+
+
+        <h2>
+            <?php echo $rows['email'];?>
+        </h2>
+        
+        
+        <h2>
+            <?php echo $rows['gender'];?>
+        </h2>
+        
+
+        <?php
+        
+
+    }
+}
+?>
