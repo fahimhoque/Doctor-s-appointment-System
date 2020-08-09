@@ -1,0 +1,22 @@
+body {
+	background-color: silver;
+}
+.header {
+	background-color: black;
+}
+
+.header h1 {
+	color: white;
+}
+a {
+	text-decoration: none;
+}
+
+.content {
+	
+	background-color: silver;
+}
+.content a {
+	color: black;
+	font-size: 5rem;
+}
