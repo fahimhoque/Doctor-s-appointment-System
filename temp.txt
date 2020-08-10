@@ -12,6 +12,8 @@ $result = mysqli_query($conn, $sql);
 
 $count = mysqli_num_rows($result);
 
+
+
 $sql_patient = "SELECT * FROM patient";
 $result_patient = mysqli_query($conn, $sql_patient);
 
@@ -177,7 +179,7 @@ $count_patient = mysqli_num_rows($result_patient);
                                             <td><?php echo $rows['contact_number'];?></td>
                                             <td><?php echo $rows['gender'];?></td>
                                             <!--<td><a href="fetch-doctor-details?id=<?php //echo $rows['id'];?>"> Options</a></td>-->
-                                            <td><input class="edit_data" type="button" name="edit" value="Edit" id="<?php echo $rows['id'];?> "></td>
+                                            <td><input class="doctor_edit_data" type="button" name="edit" value="Edit" id="<?php echo $rows['id'];?> "></td>
                                             
                                         </tr> 
                                         <?php
@@ -192,6 +194,27 @@ $count_patient = mysqli_num_rows($result_patient);
 
                 </table>
             </div>
+
+
+            <div id="dataModal" class="modal fade">  
+                <div class="modal-dialog">  
+                    <div class="modal-content">  
+                        <div class="modal-header">  
+                                <h4 class="modal-title">Doctor Details</h4>  
+                        </div>  
+                        <div class="modal-body" id="employee_detail">  
+                            
+                        </div>  
+                        <div class="modal-footer">  
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                        </div>  
+                    </div>  
+                </div>  
+            </div>
+
+            <!--<div class="modal-body" id="employee_detail">  
+                            
+            </div>-->
               
         </div>
     </div>
@@ -228,8 +251,31 @@ $count_patient = mysqli_num_rows($result_patient);
                 $("#show-patient-details").hide();
               
             });
-                       
-            
+
+
+
+
+
+            $(document).on('click', '.doctor_edit_data', function(){  
+                   var doctor_id = $(this).attr("id");  
+                   if(doctor_id != '')  
+                   {  
+                        $.ajax({  
+                             url:"views/admin/fetch-doctor-details.php",  
+                             method:"POST",  
+                             data:{doctor_id:doctor_id},  
+                             success:function(data){  
+                                  $('#employee_detail').html(data);  
+                                  $('#dataModal').modal('show');  
+                             }  
+                        });  
+                   }            
+            });
+
+
+
+
+
 
         });
 

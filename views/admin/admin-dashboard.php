@@ -200,7 +200,6 @@ $count_patient = mysqli_num_rows($result_patient);
                 <div class="modal-dialog">  
                     <div class="modal-content">  
                         <div class="modal-header">  
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>  
                                 <h4 class="modal-title">Doctor Details</h4>  
                         </div>  
                         <div class="modal-body" id="employee_detail">  
@@ -212,6 +211,10 @@ $count_patient = mysqli_num_rows($result_patient);
                     </div>  
                 </div>  
             </div>
+
+            <!--<div class="modal-body" id="employee_detail">  
+                            
+            </div>-->
               
         </div>
     </div>
