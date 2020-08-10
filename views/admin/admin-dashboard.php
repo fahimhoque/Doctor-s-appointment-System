@@ -161,7 +161,8 @@ $count_patient = mysqli_num_rows($result_patient);
                         <th>Email</th>
                         <th>Comtact Number</th>
                         <th>Gender</th>
-                        <th>Action</th>
+                        <th>View</th>
+                        <th>Edit</th>
                         
                     </thead>
 
@@ -179,7 +180,8 @@ $count_patient = mysqli_num_rows($result_patient);
                                             <td><?php echo $rows['contact_number'];?></td>
                                             <td><?php echo $rows['gender'];?></td>
                                             <!--<td><a href="fetch-doctor-details?id=<?php //echo $rows['id'];?>"> Options</a></td>-->
-                                            <td><input class="doctor_edit_data" type="button" name="edit" value="Edit" id="<?php echo $rows['id'];?> "></td>
+                                            <td><input class="doctor_view_data" type="button" name="View" value="View" id="<?php echo $rows['id'];?> "></td>
+                                            <td><input class="doctor_edit_data" type="button" name="View" value="Edit" id="<?php echo $rows['id'];?> "></td>
                                             
                                         </tr> 
                                         <?php
@@ -212,9 +214,52 @@ $count_patient = mysqli_num_rows($result_patient);
                 </div>  
             </div>
 
-            <!--<div class="modal-body" id="employee_detail">  
-                            
-            </div>-->
+
+
+
+
+            <div id="add_data_Modal" class="modal fade">  
+                <div class="modal-dialog">  
+                    <div class="modal-content">  
+
+                        <div class="modal-header"> 
+                            <h4 class="modal-title">Update Doctor Details</h4>  
+                        </div>  
+
+                        <div class="modal-body"> 
+
+                            <form method="post" id="update_form">  
+                                <label>Enter First Name</label>  
+                                <input type="text" name="f_name" id="f_name" class="form-control" />  
+                                <br />  
+                                <label>Enter Last Name</label>  
+                                <input type="text" name="l_name" id="l_name" class="form-control" />  
+                                <br />
+                                <label>Enter Email</label>  
+                                <input type="text" name="email" id="email" class="form-control" />  
+                                <br />  
+                                <label>Enter Contact Number</label>  
+                                <input type="text" name="contact_number" id="contact_number" class="form-control" />  
+                                <br />
+                                <label>Select Gender</label>  
+                                <select name="gender" id="gender" class="form-control">  
+                                    <option value="Male">Male</option>  
+                                    <option value="Female">Female</option>  
+                                    <option value="Female">Rather not say</option>
+                                </select>  
+                                <br />    
+                                <input type="hidden" name="doctor_id" id="doctor_id" />  
+                                <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />  
+                            </form>  
+                            </div>  
+                            <div class="modal-footer">  
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                            </div>  
+                    </div>  
+                </div>  
+            </div> 
+
+            
               
         </div>
     </div>
@@ -256,12 +301,85 @@ $count_patient = mysqli_num_rows($result_patient);
 
 
 
+
+
+            /*Edit Doctor Data*/
             $(document).on('click', '.doctor_edit_data', function(){  
+            var doctor_id = $(this).attr("id");  
+               $.ajax({  
+                    url:"views/admin/fetch-full-doctor-details.php",  
+                    method:"POST",  
+                    data:{doctor_id:doctor_id},  
+                    dataType:"json",  
+                    success:function(data){  
+                        $('#f_name').val(data.f_name); 
+                        $('#l_name').val(data.l_name);
+                        $('#email').val(data.email);
+                        $('#contact_number').val(data.contact_number);
+                        $('#gender').val(data.gender);    
+                        $('#doctor_id').val(data.doctor_id);  
+                        $('#insert').val("Update");  
+                        $('#add_data_Modal').modal('show');  
+                    }  
+                });  
+            });  
+            $('#update_form').on("submit", function(event){  
+                event.preventDefault();  
+                if($('#f_name').val() == "")  
+                {  
+                    alert("First name is required");  
+                }  
+                else if($('#l_name').val() == "")  
+                {  
+                    alert("Last name is required");  
+                }  
+                else if($('#email').val() == '')  
+                {  
+                        alert("Email is required");  
+                }
+                else if($('#contact_number').val() == '')  
+                {  
+                        alert("Contact number is required");  
+                }  
+                else if($('#age').val() == '')  
+                {  
+                    alert("Age is required");  
+                }  
+                else  
+                {  
+                    $.ajax({  
+                        url:"views/admin/update-doctor-data.php",  
+                        method:"POST",  
+                        data:$('#update_form').serialize(),  
+                        beforeSend:function(){  
+                                $('#insert').val("Inserting");  
+                        },  
+                        success:function(data){  
+                            $('#insert_form')[0].reset();  
+                            $('#add_data_Modal').modal('hide');  
+                            $('#employee_table').html(data);  
+                        }  
+                    });  
+                }  
+            });
+
+
+
+
+
+
+
+
+
+
+
+            /*View doctor details*/
+            $(document).on('click', '.doctor_view_data', function(){  
                    var doctor_id = $(this).attr("id");  
                    if(doctor_id != '')  
                    {  
                         $.ajax({  
-                             url:"views/admin/fetch-doctor-details.php",  
+                             url:"views/admin/doctor-details.php",  
                              method:"POST",  
                              data:{doctor_id:doctor_id},  
                              success:function(data){  
