@@ -1,5 +1,5 @@
 <?php  
-require('views/config.php');
+require('config.php');
 
 if (isset($_POST['btn_login'])){
 	
@@ -7,13 +7,14 @@ if (isset($_POST['btn_login'])){
 	$email = $_POST['email_patient'];
 	$password = $_POST['password_patient'];
 
-	// CHECK FOR THE RECORD FROM TABLE
 	$query = "SELECT * FROM `patient` WHERE email='$email' and password='$password'";
 	 
 	$result = mysqli_query($conn, $query) or die(mysqli_error($conn));
 	$count = mysqli_num_rows($result);
 
 	if ($count == 1){
+		$_SESSION['loggedin'] = true;
+    	$_SESSION['email'] = $email;
 
 		header('Location: patient-dashboard');
 	}
