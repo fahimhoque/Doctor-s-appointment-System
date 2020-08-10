@@ -1,36 +1,19 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Patient Dashboard</title>
 
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
     <!--Custom CSS Link-->
     <link rel="stylesheet" type="text/css" href="views/patient/style/patient-dashboard.css">
-
-    <!--Bootstrap CSS CDN-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
 
 
     <!--Font Awesome CDN-->
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-
-    <!--Custom JS Link-->
-    <!--<script src="views/patient/patient-dashboard.js"></script>-->
-    <!--<script src="views/patient/scripts/admin-dashboard.js"></script>-->
-    
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
 </head>
 <body>
