@@ -7,13 +7,15 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     header('Location: admin-login');
 }
 require('config.php');
+
+//show doctor details
 $sql = "SELECT * FROM doctor";
 $result = mysqli_query($conn, $sql);
 
 $count = mysqli_num_rows($result);
 
 
-
+//show patient details
 $sql_patient = "SELECT * FROM patient";
 $result_patient = mysqli_query($conn, $sql_patient);
 
@@ -25,32 +27,27 @@ $count_patient = mysqli_num_rows($result_patient);
 <head>
     <title>Admin Dashboard</title>
 
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="views/admin/scripts/doctor-details.js"></script>
+    <script src="views/admin/scripts/patient-details.js"></script>
+
     <!--Custom CSS Link-->
     <link rel="stylesheet" type="text/css" href="views/admin/style/admin-dashboard.css">
-
-    <!--Bootstrap CSS CDN-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
-
-
     <!--Font Awesome CDN-->
-    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-
-    <!--Custom JS Link-->
-    <script src="views/admin/scripts/patient-details.js"></script>
-    <script src="views/admin/scripts/admin-dashboard.js"></script>
-    
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>   
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
     <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    
 
     <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    
 
 </head>
 <body>
@@ -93,7 +90,7 @@ $count_patient = mysqli_num_rows($result_patient);
         <div class="main_content">
             <div class="header">Welcome!! Have a nice day, <?php echo  $_SESSION['username'] . "!";?></div>
             
-
+            <!--Start of Patient Details-->
             <div id="show-patient-details">
                 <h3>Patient Details</h3>
                 <br>
@@ -110,7 +107,8 @@ $count_patient = mysqli_num_rows($result_patient);
                         <th>Email</th>
                         <th>Comtact Number</th>
                         <th>Gender</th>
-                        <th>Operations</th>
+                        <th>View</th>
+                        <th>Edit</th>
                         
                     </thead>
 
@@ -127,8 +125,8 @@ $count_patient = mysqli_num_rows($result_patient);
                                             <td><?php echo $rows_patient['email'];?></td>
                                             <td><?php echo $rows_patient['contact_number'];?></td>
                                             <td><?php echo $rows_patient['gender'];?></td>
-                                            <!--<td><a href="fetch-doctor-details?id=<?php //echo $rows['id'];?>"> Options</a></td>-->
-                                            <td><input class="edit_data" type="button" name="edit" value="Edit" id="<?php echo $rows['id'];?> "></td>
+                                            <td><input class="patient_view_data" type="button" name="patient_view" value="View" patient_id="<?php echo $rows['id'];?> "></td>
+                                            <td><input class="patient_edit_data" type="button" name="patient_edit" value="Edit" id="<?php echo $rows['id'];?> "></td>
                                             
                                         </tr> 
                                         <?php
@@ -142,6 +140,69 @@ $count_patient = mysqli_num_rows($result_patient);
 
                 </table>
             </div>
+
+            
+            <div id="patient_dataModal" class="modal fade">  
+                <div class="modal-dialog">  
+                    <div class="modal-content">  
+                        <div class="modal-header">  
+                                <h4 class="modal-title">Patient Details</h4>  
+                        </div>  
+                        <div class="modal-body" id="patient_detail_view">  
+                            
+                        </div>  
+                        <div class="modal-footer">  
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                        </div>  
+                    </div>  
+                </div>  
+            </div>
+
+
+
+
+            
+            <div id="edit_data_Modal_patient" class="modal fade">  
+                <div class="modal-dialog">  
+                    <div class="modal-content">  
+
+                        <div class="modal-header"> 
+                            <h4 class="modal-title">Update Patient Details</h4>  
+                        </div>  
+
+                        <div class="modal-body"> 
+
+                            <form method="post" id="update_form_patient">  
+                                <label>Enter First Name</label>  
+                                <input type="text" name="f_name" id="f_name_patient" class="form-control" />  
+                                <br />  
+                                <label>Enter Last Name</label>  
+                                <input type="text" name="l_name" id="l_name_patient" class="form-control" />  
+                                <br />
+                                <label>Enter Email</label>  
+                                <input type="text" name="email" id="email_patient" class="form-control" />  
+                                <br />  
+                                <label>Enter Contact Number</label>  
+                                <input type="text" name="contact_number" id="contact_number_patient" class="form-control" />  
+                                <br />
+                                <label>Select Gender</label>  
+                                <select name="gender" id="gender_patient" class="form-control">  
+                                    <option value="Male">Male</option>  
+                                    <option value="Female">Female</option>  
+                                    <option value="Female">Rather not say</option>
+                                </select>  
+                                <br />    
+                                <input type="hidden" name="id_patient" id="id_patient" />  
+                                <input type="submit" name="insert_patient" id="insert_patient" value="Insert" class="btn btn-success" />  
+                            </form>  
+                            </div>  
+                            <div class="modal-footer">  
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                            </div>  
+                    </div>  
+                </div>  
+            </div>
+            <!--End of Patient Details-->            
 
 
 
@@ -280,122 +341,6 @@ $count_patient = mysqli_num_rows($result_patient);
 
         $("#show-doctor-details").hide();
         $("#show-patient-details").hide();
-
-        //For Patients
-        $(document).ready(function(){
-
-            $("#load-patient-data").click(function(){
-                $("#show-patient-details").show();
-                $("#show-doctor-details").hide();
-              });
-
-            $("#load-doctor-data").click(function(){
-                
-
-                $("#show-doctor-details").show();
-                $("#show-patient-details").hide();
-              
-            });
-
-
-
-
-
-
-
-            /*Edit Doctor Data*/
-            $(document).on('click', '.doctor_edit_data', function(){  
-            var doctor_id = $(this).attr("id");  
-               $.ajax({  
-                    url:"views/admin/fetch-full-doctor-details.php",  
-                    method:"POST",  
-                    data:{doctor_id:doctor_id},  
-                    dataType:"json",  
-                    success:function(data){  
-                        $('#f_name').val(data.f_name); 
-                        $('#l_name').val(data.l_name);
-                        $('#email').val(data.email);
-                        $('#contact_number').val(data.contact_number);
-                        $('#gender').val(data.gender);    
-                        $('#doctor_id').val(data.doctor_id);  
-                        $('#insert').val("Update");  
-                        $('#add_data_Modal').modal('show');  
-                    }  
-                });  
-            });  
-            $('#update_form').on("submit", function(event){  
-                event.preventDefault();  
-                if($('#f_name').val() == "")  
-                {  
-                    alert("First name is required");  
-                }  
-                else if($('#l_name').val() == "")  
-                {  
-                    alert("Last name is required");  
-                }  
-                else if($('#email').val() == '')  
-                {  
-                        alert("Email is required");  
-                }
-                else if($('#contact_number').val() == '')  
-                {  
-                        alert("Contact number is required");  
-                }  
-                else if($('#age').val() == '')  
-                {  
-                    alert("Age is required");  
-                }  
-                else  
-                {  
-                    $.ajax({  
-                        url:"views/admin/update-doctor-data.php",  
-                        method:"POST",  
-                        data:$('#update_form').serialize(),  
-                        beforeSend:function(){  
-                                $('#insert').val("Inserting");  
-                        },  
-                        success:function(data){  
-                            $('#insert_form')[0].reset();  
-                            $('#add_data_Modal').modal('hide');  
-                            $('#employee_table').html(data);  
-                        }  
-                    });  
-                }  
-            });
-
-
-
-
-
-
-
-
-
-
-
-            /*View doctor details*/
-            $(document).on('click', '.doctor_view_data', function(){  
-                   var doctor_id = $(this).attr("id");  
-                   if(doctor_id != '')  
-                   {  
-                        $.ajax({  
-                             url:"views/admin/doctor-details.php",  
-                             method:"POST",  
-                             data:{doctor_id:doctor_id},  
-                             success:function(data){  
-                                  $('#employee_detail').html(data);  
-                                  $('#dataModal').modal('show');  
-                             }  
-                        });  
-                   }            
-            });
-
-
-
-
-
-
-        });
 
     </script>
     

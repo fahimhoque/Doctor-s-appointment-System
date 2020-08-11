@@ -1,27 +1,30 @@
-<?php
-
-require('config.php');
-$sql = "SELECT * FROM patient";
-$result = mysqli_query($conn, $sql);
-
-$count = mysqli_num_rows($result);
-if($count > 0){
-	while($rows = mysqli_fetch_array($result)){
-
-?>
-		<tr>
-			<td><?php echo $rows['id'];?> </td>
-			<td><?php echo $rows['f_name'];?></td>
-			<td><?php echo $rows['l_name'];?></td>
-			<td><?php echo $rows['email'];?></td>
-			<td><?php echo $rows['contact_number'];?></td>
-			<td><?php echo $rows['gender'];?></td>
-			<td><a id="get-id" href="" onclick="get_id()">Edit</a></td>
-		</tr>
-
-<?php		
-
-	}
-}
-?>
-
+ <?php  
+ if(isset($_POST["patient_id"]))  
+ {  
+      $output = '';  
+      $connect = mysqli_connect("localhost", "root", "", "das");  
+      $query = "SELECT * FROM patient WHERE id = '".$_POST["patient_id"]."'";  
+      $result = mysqli_query($connect, $query);  
+      $output .= '  
+      ';  
+      while($row = mysqli_fetch_array($result))  
+      {  
+           $output .= '  
+                <h2>'.$row["id"].'</h2>
+                <h2>'.$row["f_name"].'</h2>
+                
+                <h2>'.$row["l_name"].'</h2>
+                <h2>'.$row["email"].'</h2>
+                <h2>'.$row["contact_number"].'</h2>
+                <h2>'.$row["gender"].'</h2>
+                 
+           ';  
+      }  
+      $output .= '  
+           </table>  
+      </div>  
+      ';  
+      echo $output;  
+ }  
+ ?>
+ 
