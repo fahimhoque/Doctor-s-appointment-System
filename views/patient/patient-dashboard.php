@@ -1,13 +1,14 @@
+<!--
 <?php
-session_start();
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+//session_start();
+//if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     
-} else {
-    echo "You need to login first to view the dashboard";
-    header('Location: patient-login');
-}
+//} else {
+    //echo "You need to login first to view the dashboard";
+    //header('Location: patient-login');
+//}
+?>-->
 
-?>
 
 <!DOCTYPE html>
 <html>

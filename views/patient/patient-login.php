@@ -13,8 +13,8 @@ if (isset($_POST['btn_login'])){
 	$count = mysqli_num_rows($result);
 
 	if ($count == 1){
-		$_SESSION['loggedin'] = true;
-    	$_SESSION['email'] = $email;
+		//$_SESSION['loggedin'] = true;
+    	//$_SESSION['email'] = $email;
 
 		header('Location: patient-dashboard');
 	}

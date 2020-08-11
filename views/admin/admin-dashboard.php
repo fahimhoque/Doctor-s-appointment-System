@@ -83,7 +83,7 @@ $count_patient = mysqli_num_rows($result_patient);
 
                 <!--Logout-->
                 
-                <li><a href="admin-logout"><i class="fas fa-cog"></i>LogOut</button></a></li>
+                <li><a href="admin-logout"><i class="fas fa-power-off"></i>LogOut</button></a></li>
                 
                 
 
