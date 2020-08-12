@@ -12,7 +12,7 @@ require('config.php');
 $sql = "SELECT * FROM doctor";
 $result = mysqli_query($conn, $sql);
 
-$count = mysqli_num_rows($result);
+$count_doctor = mysqli_num_rows($result);
 
 
 //show patient details
@@ -40,15 +40,6 @@ $count_patient = mysqli_num_rows($result_patient);
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-
-
-
-    <!-- Popper JS -->
-    
-
-    <!-- Latest compiled JavaScript -->
-    
-
 </head>
 <body>
     <!--NAVBAR-->
@@ -57,7 +48,6 @@ $count_patient = mysqli_num_rows($result_patient);
             <h2>DAS Admin</h2>
             <ul>
                 <!--Dashboard which will be active on Login-->
-                
                 <li><a href="admin-dashboard"><i class="fas fa-th"></i>Dashboard</a></li>
                 
 
@@ -101,7 +91,7 @@ $count_patient = mysqli_num_rows($result_patient);
                           <div class="box">
                             <i class="fa fa-users fa-fw bg-primary"></i>
                             <div class="info">
-                              <h3>1,245</h3> <span>Patients</span>
+                              <h3><?php echo $count_patient; ?></h3> <span>Patients</span>
                               <p>Total registered patients</p>
                             </div>
                           </div>
@@ -110,8 +100,8 @@ $count_patient = mysqli_num_rows($result_patient);
                           <div class="box">
                             <i class="fa fa-medkit fa-fw danger"></i>
                             <div class="info">
-                              <h3>34</h3> <span>Doctors</span>
-                              <p>Total registered patients</p>
+                              <h3><?php echo $count_doctor; ?></h3> <span>Doctors</span>
+                              <p>Total registered Doctors</p>
                             </div>
                           </div>
                         </div>
@@ -269,7 +259,7 @@ $count_patient = mysqli_num_rows($result_patient);
 
                     <tbody id="response-doctor">
                         <?php  
-                               if($count > 0){
+                               if($count_doctor > 0){
                                     while($rows = mysqli_fetch_array($result)){
 
                                         ?>
@@ -364,26 +354,21 @@ $count_patient = mysqli_num_rows($result_patient);
 
 
             <!--Start of Tickets-->
-            
-
-
-
-
-
+            <div>
+                
+            </div>            
             <!--End of Tickets--->
+
+
+
 
 
             <!--Start of settings-->
             <div>
                 
             </div>
+            <!--End of Settings--> 
 
-
-
-
-
-
-            <!--End of Settings-->  
         </div>
     </div>
 
