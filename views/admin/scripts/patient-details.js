@@ -43,11 +43,7 @@ $(document).ready(function(){
         else if($('#contact_number_patient').val() == '')  
         {  
             alert("Contact number is required");  
-        }  
-        else if($('#age').val() == '')  
-        {  
-            alert("Age is required");  
-        }  
+        }    
         else  
         {  
             $.ajax({  

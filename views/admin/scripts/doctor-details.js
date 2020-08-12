@@ -42,10 +42,6 @@ $(document).ready(function(){
         {  
             alert("Contact number is required");  
         }  
-        else if($('#age').val() == '')  
-        {  
-            alert("Age is required");  
-        }  
         else  
         {  
             $.ajax({  

@@ -11,15 +11,17 @@ require('config.php');
 //show doctor details
 $sql = "SELECT * FROM doctor";
 $result = mysqli_query($conn, $sql);
-
 $count_doctor = mysqli_num_rows($result);
 
 
 //show patient details
 $sql_patient = "SELECT * FROM patient";
 $result_patient = mysqli_query($conn, $sql_patient);
-
 $count_patient = mysqli_num_rows($result_patient);
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -58,6 +60,9 @@ $count_patient = mysqli_num_rows($result_patient);
                 <!--Load Doctor's Data on Click-->
                 <li><a href="javascript:void(0);" id="load-doctor-data"><i class="fas fa-medkit"></i>Doctors</a></li>
 
+
+                <!--Load Blood Data on Click-->
+                <li><a href="javascript:void(0);" id="load-blood-data"><i class="fas fa-tint"></i>Blood</a></li>
 
 
                 <!--Load Ticket's Data on Click-->
