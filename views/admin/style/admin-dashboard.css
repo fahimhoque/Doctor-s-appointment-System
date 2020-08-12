@@ -21,7 +21,7 @@ body {
 .wrapper .sidebar {
   width: 200px;
   height: 100%;
-  background: #4b4276;
+  background: #521945;
   padding: 30px 0px;
   position: fixed;
 }
@@ -103,3 +103,35 @@ body {
   font-size: 13px;
   background-color: green;
 }
+
+/* Start statistics */
+.statistics {
+  margin-top: 25px;
+  color: #CCC;
+}
+.statistics .box {
+  background-color: #3D4152;
+  padding: 15px;
+  overflow: hidden;
+}
+.statistics .box > i {
+  float: left;
+  color: #FFF;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  font-size: 22px;
+}
+.statistics .box .info {
+  float: left;
+  width: auto;
+  margin-left: 10px;
+}
+.statistics .box .info h3 {
+  margin: 5px 0 5px;
+  display: inline-block;
+}
+.statistics .box .info p {color:#BBB}
+
+/* End statistics */

@@ -1,12 +1,8 @@
 $(document).ready(function(){
-    $("#load-patient-data").click(function(){
-        $("#show-patient-details").show();
-        $("#show-doctor-details").hide();
-    });
-
     $("#load-doctor-data").click(function(){                
         $("#show-doctor-details").show();
         $("#show-patient-details").hide();
+        $("#show-statistics").hide();
     });
 
     $(document).on('click', '.doctor_edit_data', function(){  

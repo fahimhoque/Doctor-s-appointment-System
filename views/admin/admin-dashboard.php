@@ -89,6 +89,46 @@ $count_patient = mysqli_num_rows($result_patient);
         
         <div class="main_content">
             <div class="header">Welcome!! Have a nice day, <?php echo  $_SESSION['username'] . "!";?></div>
+
+
+
+            <!--Start of Dash-->
+            <div id="show-statistics">
+                <section class="statistics">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="box">
+                            <i class="fa fa-users fa-fw bg-primary"></i>
+                            <div class="info">
+                              <h3>1,245</h3> <span>Patients</span>
+                              <p>Total registered patients</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="box">
+                            <i class="fa fa-medkit fa-fw danger"></i>
+                            <div class="info">
+                              <h3>34</h3> <span>Doctors</span>
+                              <p>Total registered patients</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="box">
+                            <i class="fa fa-tags fa-fw success"></i>
+                            <div class="info">
+                              <h3>5,245</h3> <span>Tickets</span>
+                              <p>Total tickets filed</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </section>
+            </div>
+            <!--End of Dash-->
             
             <!--Start of Patient Details-->
             <div id="show-patient-details">
@@ -330,7 +370,7 @@ $count_patient = mysqli_num_rows($result_patient);
 
 
 
-            <!--Enc of Tickets--->
+            <!--End of Tickets--->
 
 
             <!--Start of settings-->
@@ -363,7 +403,7 @@ $count_patient = mysqli_num_rows($result_patient);
 
         $("#show-doctor-details").hide();
         $("#show-patient-details").hide();
-
+        $("#show-statistics").show();
     </script>
     
 

@@ -2,12 +2,10 @@ $(document).ready(function(){
     $("#load-patient-data").click(function(){
         $("#show-patient-details").show();
         $("#show-doctor-details").hide();
+        $("#show-statistics").hide();
     });
 
-    $("#load-doctor-data").click(function(){                
-        $("#show-doctor-details").show();
-        $("#show-patient-details").hide();
-    });
+    
 
     $(document).on('click', '.patient_edit_data', function(){  
         var patient_id = $(this).attr("id");  
