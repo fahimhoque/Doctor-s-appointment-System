@@ -70,7 +70,7 @@ $(document).ready(function(){
 
 
     $(document).on('click', '.patient_view_data', function(){  
-        var patient_id = $(this).attr("patient_id");  
+        var patient_id = $(this).attr("id");  
         if(patient_id != '')  
         {  
             $.ajax({  
@@ -78,6 +78,7 @@ $(document).ready(function(){
                 method:"POST",  
                 data:{patient_id:patient_id},  
                 success:function(data){  
+                    alert(patient_id);
                     $('#patient_detail_view').html(data);  
                     $('#patient_dataModal').modal('show');  
                 }  

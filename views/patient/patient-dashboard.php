@@ -22,6 +22,7 @@
 
     <!--Custom CSS Link-->
     <link rel="stylesheet" type="text/css" href="views/patient/style/patient-dashboard.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
 
     <!--Font Awesome CDN-->
@@ -51,7 +52,31 @@
                 <li><a href="patient-logout"><i class="fas fa-cog"></i>LogOut</button></a></li>
             </ul>
         </div>
+
+
+
+        <div class="clearfix support-main">
+            <form role="form" method="post" action="support-process.php">
+                <input type="hidden" name="formtype" value="support_ticket">
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="subject" placeholder="Subject" autofocus required>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea name="message" class="form-control" cols=40 rows=10 placeholder="Message" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                    
+             </form>
+        </div>
     </div>
+
+
+
+    
 
    
 </body>

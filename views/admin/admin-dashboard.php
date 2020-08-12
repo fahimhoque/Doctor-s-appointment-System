@@ -125,8 +125,8 @@ $count_patient = mysqli_num_rows($result_patient);
                                             <td><?php echo $rows_patient['email'];?></td>
                                             <td><?php echo $rows_patient['contact_number'];?></td>
                                             <td><?php echo $rows_patient['gender'];?></td>
-                                            <td><input class="patient_view_data" type="button" name="patient_view" value="View" patient_id="<?php echo $rows['id'];?> "></td>
-                                            <td><input class="patient_edit_data" type="button" name="patient_edit" value="Edit" id="<?php echo $rows['id'];?> "></td>
+                                            <td><input class="patient_view_data" type="button" name="patient_view" value="View" id="<?php echo $rows_patient['id'];?> "></td>
+                                            <td><input class="patient_edit_data" type="button" name="patient_edit" value="Edit" id="<?php echo $rows_patient['id'];?> "></td>
                                             
                                         </tr> 
                                         <?php
@@ -205,7 +205,7 @@ $count_patient = mysqli_num_rows($result_patient);
             <!--End of Patient Details-->            
 
 
-
+            <!--End of Doctor Details-->
             <div id="show-doctor-details">
                 <h3>Doctor Details</h3>
                 <br>
@@ -319,9 +319,31 @@ $count_patient = mysqli_num_rows($result_patient);
                     </div>  
                 </div>  
             </div> 
-
+            <!--End of Doctor Details-->
             
-              
+
+
+            <!--Start of Tickets-->
+            
+
+
+
+
+
+            <!--Enc of Tickets--->
+
+
+            <!--Start of settings-->
+            <div>
+                
+            </div>
+
+
+
+
+
+
+            <!--End of Settings-->  
         </div>
     </div>
 
