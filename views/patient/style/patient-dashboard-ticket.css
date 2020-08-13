@@ -1,7 +1,30 @@
+#ticket input[type=text], textarea {
+    width: 150%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 55px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+#ticket input[type=submit] {
+  	background-color: #4CAF50;
+  	color: white;
+  	padding: 20px 20px;
+  	border: none;
+  	border-radius: 80px;
+  	cursor: pointer;
+}
+
+#ticket input[type=submit]:hover {
+    background-color: #45a049;
+}
+
 #ticket {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	margin-top: -50px;
-	margin-left: -100px;
+  	position: fixed;
+	  top: 15%;
+	  left: 40%;
+	  margin-left: -300px;
 }

@@ -72,7 +72,6 @@ $(document).ready(function(){
                 method:"POST",  
                 data:{patient_id:patient_id},  
                 success:function(data){  
-                    alert(patient_id);
                     $('#patient_detail_view').html(data);  
                     $('#patient_dataModal').modal('show');  
                 }  

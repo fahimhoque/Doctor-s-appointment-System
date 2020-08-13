@@ -275,7 +275,6 @@ $count_patient = mysqli_num_rows($result_patient);
                                             <td><?php echo $rows['email'];?></td>
                                             <td><?php echo $rows['contact_number'];?></td>
                                             <td><?php echo $rows['gender'];?></td>
-                                            <!--<td><a href="fetch-doctor-details?id=<?php //echo $rows['id'];?>"> Options</a></td>-->
                                             <td><input class="doctor_view_data" type="button" name="View" value="View" id="<?php echo $rows['id'];?> "></td>
                                             <td><input class="doctor_edit_data" type="button" name="View" value="Edit" id="<?php echo $rows['id'];?> "></td>
                                             
