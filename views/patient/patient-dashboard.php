@@ -1,13 +1,19 @@
-<!--
 <?php
-//session_start();
-//if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-    
-//} else {
-    //echo "You need to login first to view the dashboard";
-    //header('Location: patient-login');
-//}
-?>-->
+
+require('config.php');
+if (isset($_POST['submit_find_blood'])){
+
+    $city = $_POST['city'];
+    $bloodtype = $_POST['blood-type'];
+
+    $sql_blood_donor = "SELECT * FROM blood_donor WHERE city='$city' and bloodtype='$bloodtype' ";
+    $result_blood_donor = mysqli_query($conn, $sql_blood_donor) or die(mysqli_error($conn));
+
+    //$count = mysqli_num_rows($result);
+    $count_blood_donor = mysqli_num_rows($result_blood_donor);
+
+}
+?>
 
 
 <!DOCTYPE html>
@@ -17,15 +23,18 @@
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="views/patient/scripts/patient-ticket.js"></script>
     <script src="views/patient/scripts/patient-find-blood.js"></script>
     <!--Custom JS-->
 
 
-    <!--Custom CSS Link-->
+    <!--CSS Link-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="views/patient/style/patient-dashboard.css">
     <link rel="stylesheet" type="text/css" href="views/patient/style/patient-dashboard-ticket.css">
     <link rel="stylesheet" type="text/css" href="views/patient/style/patient-dashboard-find-blood.css">
+    <link rel="stylesheet" type="text/css" href="views/patient/style/patient-dashboard-find-doctor.css">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
@@ -41,11 +50,9 @@
             <h2>Patient</h2>
             <ul>
                 <!--Dashboard which will be active on Login-->
-                
-                <li><a href="patient-dashboard"><i class="fas fa-th"></i>Dashboard</a></li>
+                <li><a href="patient-dashboard" id="patient-dashboard"><i class="fas fa-th"></i>Dashboard</a></li>
 
                 <!--Load Ticket's Data on Click-->
-                
                 <li><a href="javascript:void(0);" id="load-patient-profile"><i class="fas fa-user"></i>Profile</a></li>                
 
                 <!--Load Patient Data On Click-->
@@ -59,13 +66,19 @@
             </ul>
         </div>
 
-        <!--Start Find Blood-->
-            <div id="find-blood">
-                <form>
+        <!--Start Dash-->
+        <div>
+            <div id="find-doctor">
+                <form action="" method="POST">
                     <label for="city">City:</label>
-                    <input type="text" name="find-city">
-                    <label for="blood-type">Blood Type:</label>
-                    <select id="blood-type" name="blood-type">
+                    <input type="text" name="find-doctor-city">
+
+                    <!--
+                    <label for="city">City:</label>
+                    <input type="text" name="city">-->
+
+                    <label for="doctor-type">Doctor Type:</label>
+                    <select class="doctor-type" id="find-doctor-type" name="find-doctor-type">
                         <option>A+</option>
                         <option>A-</option>
                         <option>B+</option>
@@ -75,9 +88,73 @@
                         <option>AB+</option>
                         <option>AB-</option>
                     </select>
-                    <input type="submit" name="submit_find_blood">
+                    <input type="submit" name="submit_find_blood" value="find" id="submit_find_blood">
                 </form>
             </div>
+        </div>
+        <!-- End Dash -->
+
+
+
+        <!--Start Find Blood-->
+            <div id="find-blood">
+                <form action="" method="POST">
+                    <label for="city">City:</label>
+                    <input type="text" name="city">
+                    <label for="blood-type">Blood Type:</label>
+                    <select class="blood-type" id="blood-type" name="blood-type">
+                        <option>A+</option>
+                        <option>A-</option>
+                        <option>B+</option>
+                        <option>B-</option>
+                        <option>O+</option>
+                        <option>O-</option>
+                        <option>AB+</option>
+                        <option>AB-</option>
+                    </select>
+                    <input type="submit" name="submit_find_blood" value="find" id="find_blood">
+                </form>
+                <div id="show-blood-donor">
+                    <h3>Blood Donor Details</h3>
+                    <br>
+                    <br>
+                    <table class="table table-stripped table-bordered text-center" id="blood-donor-details">
+                        <thead>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>City</th>
+                            <th>BLood Type</th>
+                            <th>Contact Number</th>
+                            <th>Email</th>                       
+                        </thead>
+
+                        <tbody id="response-blood-donor">
+                            <?php  
+                                   if($count_blood_donor > 0){
+                                        while($rows_blood_donor = mysqli_fetch_array($result_blood_donor)){
+
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $rows_blood_donor['f_name'];?></td>
+                                                <td><?php echo $rows_blood_donor['l_name'];?></td>
+                                                <td><?php echo $rows_blood_donor['city'];?></td>
+                                                <td><?php echo $rows_blood_donor['bloodtype'];?></td>
+                                                <td><?php echo $rows_blood_donor['contact_number'];?></td>
+                                                <td><?php echo $rows_blood_donor['email'];?></td>                                          
+                                            </tr> 
+                                            <?php
+            
+
+                                        }
+                                    }
+                            ?>
+                        </tbody>
+
+
+                    </table>
+                </div>
+            </div>
+            
         <!--End Find Blood-->
 
 
@@ -103,6 +180,7 @@
 <script>
     $("#ticket").hide();
     $("#find-blood").hide();
+    $("#show-blood-donor").hide();
 
 
 

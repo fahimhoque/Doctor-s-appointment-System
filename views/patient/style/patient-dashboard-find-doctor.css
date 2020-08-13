@@ -1,16 +1,16 @@
-#find-doctor {
+#find-blood {
   	position: fixed;
 	top: 8%;
 	left: 37.5%;
 	margin-top: 5px;
 	margin-left: -50px;
 }
-.doctor-type {
+.blood-type {
    -webkit-appearance: menulist-button;
    height: 31.75px;
    width: 80px;
 }
-#find-doctor-type input[type=submit] {
+#find-blood input[type=submit] {
 	background-color: #546CB6;
 	height: 31.75px;
 	width: 80px;
