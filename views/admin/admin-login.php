@@ -13,17 +13,18 @@ if (isset($_POST['btn_submit'])){
 	$result = mysqli_query($conn, $query) or die(mysqli_error($conn));
 	$count = mysqli_num_rows($result);
 
-	if ($count == 1){
-		session_start();
-    	$_SESSION['loggedin'] = true;
-    	$_SESSION['username'] = $username;
-
-		header('Location: admin-dashboard');
+	if ($count == 0){
+		echo "<script type='text/javascript'>alert('Invalid Login Credentials')</script>";
 	}
 	
 	else{
-	echo "<script type='text/javascript'>alert('Invalid Login Credentials')</script>";
-	//echo "Invalid Login Credentials";
+		$row = mysqli_fetch_array($result);
+		session_start();
+		$_SESSION['loggedin'] = true;
+    	$_SESSION['admin_id'] = $row['id'];
+    	$_SESSION['admin_username'] = $row['username'];
+
+		header('Location: admin-dashboard');
 	}
 }
 ?>

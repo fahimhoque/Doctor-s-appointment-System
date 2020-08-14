@@ -83,7 +83,7 @@ $count_patient = mysqli_num_rows($result_patient);
         </div>
         
         <div class="main_content">
-            <div class="header">Welcome!! Have a nice day, <?php echo  $_SESSION['username'] . "!";?></div>
+            <div class="header">Welcome!! Have a nice day, <?php echo  $_SESSION['admin_username'] . "#".$_SESSION['admin_id']."!";?></div>
 
 
 

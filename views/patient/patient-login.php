@@ -1,5 +1,6 @@
 <?php  
 require('config.php');
+session_start();
 
 if (isset($_POST['btn_login'])){
 	
@@ -13,8 +14,11 @@ if (isset($_POST['btn_login'])){
 	$count = mysqli_num_rows($result);
 
 	if ($count == 1){
-		//$_SESSION['loggedin'] = true;
-    	//$_SESSION['email'] = $email;
+		$rows_patient = mysqli_fetch_array($result);
+		
+		$_SESSION['id']     = $rows_patient['id'];
+		$_SESSION['f_name'] = $rows_patient['f_name'];
+		$_SESSION['l_name'] = $rows_patient['l_name'];
 
 		header('Location: patient-dashboard');
 	}
