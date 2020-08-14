@@ -23,8 +23,12 @@ if (isset($_POST['submit_find_blood'])){
 <body>
 	<div id="find-blood">
         <form action="" method="POST" onsubmit="return false">
+
+
             <label for="city">City:</label>
-            <input type="text" name="city">
+            <input type="text" id="city" name="city">
+
+
             <label for="blood-type">Blood Type:</label>
             <select class="blood-type" id="blood-type" name="blood-type">
                 <option>A+</option>
@@ -36,7 +40,7 @@ if (isset($_POST['submit_find_blood'])){
                 <option>AB+</option>
                 <option>AB-</option>
             </select>
-            <input type="submit" name="btn_find_blood" id="btn_find_blood" value="Find Blood">
+            <input type="submit" name="btn_find_blood" id="btn_find_blood" value="Find Blood" onclick="return function1();">
         </form>
 
         <div id="show-blood-donor">
@@ -81,6 +85,14 @@ if (isset($_POST['submit_find_blood'])){
             </table>
         </div>
     </div>
+    <script type='text/javascript'>
+        function function1(){
+            var city       =document.getElementById("city").value;
+            var blood_type =document.getElementById("blood-type").value;
+            var response   =confirm("Are you sure? option1="+city+" option2="+blood_type);
+            return response;
+         }
+    </script>
 
 </body>
 </html>

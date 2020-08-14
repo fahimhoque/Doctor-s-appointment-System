@@ -56,7 +56,7 @@ if (isset($_POST['submit_find_blood'])){
                 <li><a href="javascript:void(0);" id="load-patient-profile"><i class="fas fa-user"></i>Profile</a></li>                
 
                 <!--Load Patient Data On Click-->
-                <li><a href="javascript:void(0)"  id="patient-find-blood"><i class="fas fa-tint"></i>Find Blood</a></li>
+                <li><a href="find-blood" target="_blank"><i class="fas fa-tint"></i>Find Blood</a></li>
 
                 <!--Load Ticket's Data on Click-->
                 <li><a href="javascript:void(0);" id="patient-ticket"><i class="fas fa-tags"></i>Ticket</a></li>
@@ -94,73 +94,6 @@ if (isset($_POST['submit_find_blood'])){
             
     </div>
     <!-- End   Profile -->
-
-
-    <!--Start Find Blood-->
-    <div id="find-blood">
-        <form action="" method="POST" onsubmit="return false">
-            <label for="city">City:</label>
-            <input type="text" name="city">
-            <label for="blood-type">Blood Type:</label>
-            <select class="blood-type" id="blood-type" name="blood-type">
-                <option>A+</option>
-                <option>A-</option>
-                <option>B+</option>
-                <option>B-</option>
-                <option>O+</option>
-                <option>O-</option>
-                <option>AB+</option>
-                <option>AB-</option>
-            </select>
-            <button id="btn_find_blood"> Find</button>
-        </form>
-
-        <div id="show-blood-donor">
-            <br>
-            <h3>Blood Donor Details</h3>
-            <br>
-            <table class="table table-stripped table-bordered text-center" id="blood-donor-details">
-                <thead>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>City</th>
-                    <th>Blood Type</th>
-                    <th>Contact Number</th>
-                    <th>Email</th>                       
-                </thead>
-
-                <tbody id="response-blood-donor">
-                    <?php  
-                            if(isset($count_blood_donor) && $count_blood_donor > 0){
-                                while($rows_blood_donor = mysqli_fetch_array($result_blood_donor)){
-                    ?>
-                                    <tr>
-                                        <td><?php echo $rows_blood_donor['f_name'];?></td>
-                                        <td><?php echo $rows_blood_donor['l_name'];?></td>
-                                        <td><?php echo $rows_blood_donor['city'];?></td>
-                                        <td><?php echo $rows_blood_donor['bloodtype'];?></td>
-                                        <td><?php echo $rows_blood_donor['contact_number'];?></td>
-                                        <td><?php echo $rows_blood_donor['email'];?></td>                                          
-                                    </tr> 
-                            
-                            <?php
-
-                                }
-                            }
-                            else{
-                                echo "No Donor found";
-                            }
-                        ?>
-                </tbody>
-
-
-            </table>
-        </div>
-    </div>
-            
-    <!--End Find Blood-->
-
-
 
     <!--Start of Ticket-->
     <div id="ticket">
