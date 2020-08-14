@@ -39,10 +39,14 @@ $patient_fname = $_SESSION['f_name'];
 
 
 
-            <div style="font-size:10pt">Welcome, <?php echo  $patient_fname." # ".$patient_id."!";?> </div>
+            <div style="font-size:10pt">Welcome, <?php echo  $patient_fname." # ".$patient_id;?> </div>
 
             <a href="patient-ticket-record.php" class="clearfix pull-right btn btn-info btn-lg active" role="button">Your Support Tickets</a>
             <br>
+            <p>Before sending a query please note :</p>
+            <ul>
+                <li>Go through our <a href="faq.php" target="_blank">FAQ Section</a> for available solutions.</li>
+            </ul>
 
             <div class="clearfix support-main">
             	<form role="form" method="post" action="support-process.php">

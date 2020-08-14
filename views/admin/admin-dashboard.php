@@ -12,14 +12,22 @@ require('config.php');
 $sql = "SELECT * FROM doctor";
 $result = mysqli_query($conn, $sql);
 $count_doctor = mysqli_num_rows($result);
-
+//show doctor tickets
+$sql_doctor_tickets = "SELECT * FROM doctor_tickets";
+$result_doctor_tickets = mysqli_query($conn, $sql_doctor_tickets);
+$count_doctor_tickets = mysqli_num_rows($result_doctor_tickets);
 
 //show patient details
 $sql_patient = "SELECT * FROM patient";
 $result_patient = mysqli_query($conn, $sql_patient);
 $count_patient = mysqli_num_rows($result_patient);
 
-
+//show patient tickets
+$sql_patient_tickets = "SELECT * FROM patient_tickets";
+$result_patient_tickets = mysqli_query($conn, $sql_patient_tickets);
+$count_patient_tickets = mysqli_num_rows($result_patient_tickets);
+//total ticket count
+$total_ticket_count = $count_patient_tickets + $count_doctor_tickets;
 
 
 ?>
@@ -114,7 +122,7 @@ $count_patient = mysqli_num_rows($result_patient);
                           <div class="box">
                             <i class="fa fa-tags fa-fw success"></i>
                             <div class="info">
-                              <h3>5,245</h3> <span>Tickets</span>
+                              <h3><?php echo $total_ticket_count; ?></h3> <span>Tickets</span>
                               <p>Total tickets filed</p>
                             </div>
                           </div>
