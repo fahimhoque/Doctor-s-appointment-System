@@ -6,8 +6,6 @@ $patient_fname = $_SESSION['f_name'];
 
 
 ?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,14 +15,13 @@ $patient_fname = $_SESSION['f_name'];
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="views/patient/scripts/patient_profile.js"></script>
-    <!--Custom JS-->
 
 
     <!--CSS Link-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="views/patient/style/patient-dashboard.css">
     <link rel="stylesheet" type="text/css" href="views/patient/style/patient_profile.css">
-    <link rel="stylesheet" type="text/css" href="views/patient/style/find_doctor.css">
+    <!--<link rel="stylesheet" type="text/css" href="views/patient/style/find_doctor.css">-->
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
@@ -37,7 +34,7 @@ $patient_fname = $_SESSION['f_name'];
     <!--NAVBAR-->
     <div class="wrapper">
         <div class="sidebar">
-            <h2>Patient</h2>
+            <h2>DAS Patient</h2>
             <ul>
                 <!--Dashboard which will be active on Login-->
                 <li><a href="patient-dashboard"   id="patient-dashboard"><i class="fas fa-th"></i>              Dashboard</a></li>
@@ -70,10 +67,10 @@ $patient_fname = $_SESSION['f_name'];
                 <div class="form-group">
                     <label for="title">Type of doctor</label>
                     <select name="title" id="title">
-                        <option value="mr">Mr.</option>
-                        <option value="mrs">Mrs.</option>
-                        <option value="miss">Miss</option>
-                        <option value="Rather not say">Rather not say</option>
+                        <option value="neurologist">Neurologist</option>
+                        <option value="psychiatrist">Psychiatrist</option>
+                        <option value="surgeon">Surgeon</option>
+                        <option value="ophthalmologist">Ophthalmologist</option>
                     </select>
                 </div>
                 <button style="margin-left: 8px;">Find</button>
@@ -86,9 +83,9 @@ $patient_fname = $_SESSION['f_name'];
     <div class="container" id="profile">
         <div class="form-wrap">
             <form action="" method="POST">
-                <h1 style="margin-left: 3px;">Update your profile</h1>
+                <h4 style="margin-left: 3px;">Update your profile</h4>
                 <p><?php echo $patient_fname." ".$patient_lname." "." # ".$patient_id?></p>
-            
+                <h5>General Information</h5>
                 <div class="form-group">
                     <label for="title">Title</label>
                     <select name="title" id="title">
@@ -134,6 +131,12 @@ $patient_fname = $_SESSION['f_name'];
                 </div>
                 <br>
                 <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" name="address" id="address" placeholder="Address">
+                </div>
+                <br>
+                <h5>Change Password</h5>
+                <div class="form-group">
                     <label for="password">Current Password</label>
                     <input type="password" name="password" id="password" placeholder="Current Password">
                 </div>
@@ -152,6 +155,9 @@ $patient_fname = $_SESSION['f_name'];
     $("#find-blood").hide();
     $("#show-blood-donor").hide();
     $("#profile").hide();
+
+
+    $("#find-doctor").show();
 </script>
     
 

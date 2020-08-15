@@ -15,7 +15,7 @@ $routes = [
 	'das/admin-login' => 		      'views/admin/admin-login.php',
 	'das/admin-dashboard' => 	      'views/admin/admin-dashboard.php',
 	'das/admin-logout' =>             'views/admin/admin-logout.php',
-	'das/fetch-doctor-details' =>      'views/admin/fetch-doctor-details.php',
+	//'das/fetch-doctor-details' =>      'views/admin/fetch-doctor-details.php',
 
 
 	//all patient related routes
