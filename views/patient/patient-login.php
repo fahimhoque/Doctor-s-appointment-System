@@ -19,6 +19,9 @@ if (isset($_POST['btn_login'])){
 		$_SESSION['id']     = $rows_patient['id'];
 		$_SESSION['f_name'] = $rows_patient['f_name'];
 		$_SESSION['l_name'] = $rows_patient['l_name'];
+		//$_SESSION['l_name'] = $rows_patient['l_name'];
+		//$_SESSION['l_name'] = $rows_patient['l_name'];
+		//$_SESSION['l_name'] = $rows_patient['l_name'];
 
 		header('Location: patient-dashboard');
 	}

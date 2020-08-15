@@ -45,7 +45,7 @@ $patient_fname = $_SESSION['f_name'];
             <br>
             <p>Before sending a query please note :</p>
             <ul>
-                <li>Go through our <a href="faq.php" target="_blank">FAQ Section</a> for available solutions.</li>
+                <li>Go through our <a href="#" target="_blank">FAQ Section</a> for available solutions.</li>
             </ul>
 
             <div class="clearfix support-main">
