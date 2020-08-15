@@ -15,6 +15,7 @@ $patient_fname = $_SESSION['f_name'];
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="views/patient/scripts/patient_profile.js"></script>
+    <script src="views/patient/scripts/patient_dashboard.js"></script>
 
 
     <!--CSS Link-->
@@ -36,6 +37,7 @@ $patient_fname = $_SESSION['f_name'];
         <div class="sidebar">
             <h2>DAS Patient</h2>
             <ul>
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                 <!--Dashboard which will be active on Login-->
                 <li><a href="patient-dashboard"   id="patient-dashboard"><i class="fas fa-th"></i>              Dashboard</a></li>
 
@@ -51,6 +53,7 @@ $patient_fname = $_SESSION['f_name'];
                 <!--Logout--> 
                 <li><a href="patient-logout"><i class="fas fa-power-off"></i>                                   LogOut</button></a></li>
             </ul>
+            <span style="font-size:30px;cursor:pointer; margin-left:10px;" onclick="openNav()">&#9776; open</span>
         </div>
     </div>
 
