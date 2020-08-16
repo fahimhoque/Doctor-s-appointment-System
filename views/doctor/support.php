@@ -3,6 +3,22 @@ session_start();
 $doctor_id    = $_SESSION['id'];
 $doctor_fname = $_SESSION['f_name'];
 $doctor_lname = $_SESSION['l_name'];
+require('views/config.php');
+    if (isset($_POST['btn_submit'])){
+        $subject = $_POST['subject'];
+        $message = $_POST['message'];
+
+
+        $sql = "INSERT INTO `doctor_tickets` (`doctor_id`, `subject`, `details`) VALUES ('$doctor_id', '$subject', '$message')";
+        $result = mysqli_query($conn,$sql);
+        if($result)
+        {
+            header("location: doctor-dashboard");
+        }
+        else{
+            echo "Error: ".$sql;
+        }
+    }
 
 
 
@@ -24,9 +40,6 @@ $doctor_lname = $_SESSION['l_name'];
 
     <!--Bootstrap-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-
 
 	<title>DAS : Support</title>
 </head>
@@ -36,14 +49,9 @@ $doctor_lname = $_SESSION['l_name'];
         <div id="main" class="container">
             <h1>DAS-Doctor Support</h1>
 
+            <div style="font-size:10pt">Welcome, Dr.<?php echo  $doctor_fname." # ".$doctor_id;?> </div>
 
-            <script async type="text/javascript" src="js/imgbb-2.js" charset="utf-8"></script>
-
-
-
-            <div style="font-size:10pt">Welcome, <?php echo  $doctor_fname." # ".$doctor_id;?> </div>
-
-            <a href="patient-ticket-record.php" class="clearfix pull-right btn btn-info btn-lg active" role="button">Your Support Tickets</a>
+            <a href="" class="clearfix pull-right btn btn-info btn-lg active" role="button">Your Support Tickets</a>
             <br>
             <p>Before sending a query please note :</p>
             <ul>
@@ -51,7 +59,7 @@ $doctor_lname = $_SESSION['l_name'];
             </ul>
 
             <div class="clearfix support-main">
-            	<form role="form" method="post" action="support-process.php">
+            	<form role="form" method="post" action="" id="support-form">
             		<input type="hidden" name="formtype" value="support_ticket">
 
             		<div class="form-group">
@@ -62,14 +70,11 @@ $doctor_lname = $_SESSION['l_name'];
             			<textarea name="message" class="form-control" cols=40 rows=10 placeholder="Message" required></textarea>
             		</div>
             		<div class="form-group">
-            			<button type="submit" class="btn btn-success">Submit</button>
+            			<!--<button type="submit" name="btn_submit" class="btn btn-success" form="support-form">Submit</button>-->
+                        <input type="submit" name="btn_submit" class="btn btn-success" value="Submit">
             		</div>
-            	
             	</form>
             </div>
-
-
-
     	</div>
     </div>
 

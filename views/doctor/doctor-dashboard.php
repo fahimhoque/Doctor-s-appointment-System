@@ -23,7 +23,8 @@ $doctor_fname = $_SESSION['f_name'];
 
 <body>
     <h4><?php echo "Name#ID: ". $doctor_fname." ".$doctor_lname." # ".$doctor_id; ?></h4>
-    <a href="views/doctor/support.php">Support Ticket</a>
+    <a href="doctor/support?id=<?php echo $doctor_id;?>">Support Ticket</a>
+    <a href="doctor/support">Support Ticket</a>
 
 </body>
 
