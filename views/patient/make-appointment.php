@@ -44,9 +44,14 @@ $user_contact = $_SESSION['contact_number'];
 		     	<br>
 		     	<span><?php echo "Contact Number: ".$user_contact;?></span>
 		     	<br>
-		     	<div class="form-check">
-				    <input type="checkbox" class="form-check-input">
+				<span><?php echo "Selected Date: "; ?></span>
+				<div class="form-check">
+				    <input type="checkbox" class="form-check-input" id="book-for-me" onclick="disable_if_me();">
 				    <label class="form-check-label">Appointment for me</label>
+				</div>
+				<div class="form-check">
+				    <input type="checkbox" class="form-check-input" id="book-for-other" onclick="enable_if_other();">
+				    <label class="form-check-label">Appointment for someone else</label>
 				</div>
 		    </div>
 		</div>
@@ -59,19 +64,19 @@ $user_contact = $_SESSION['contact_number'];
 			<div class="form-row">
 			    <div class="col">
 			    	<label>First Name</label>
-			      	<input type="text" class="form-control" placeholder="First name">
+			      	<input type="text" class="form-control" id="for_patient_fname" placeholder="First name">
 			    </div>
 			    <div class="col">
 			    	<label>Last Name</label>
-			      	<input type="text" class="form-control" placeholder="Last name">
+			      	<input type="text" class="form-control" id="for_patient_lname" placeholder="Last name">
 			    </div>
 			    <div class="col">
 			    	<label>Age</label>
-			      	<input type="text" class="form-control" placeholder="Age">
+			      	<input type="text" class="form-control" id="for_patient_age" placeholder="Age">
 			    </div>
 			    <div class="col">
 			    	<label>Gender</label>
-			   		<select class="custom-select" id="gender2">
+			   		<select class="custom-select" id="for_patient_gender">
 			          	<option value="1">Male</option>
 			          	<option value="2">Female</option>
 			          	<option value="3">Other</option>
@@ -82,7 +87,7 @@ $user_contact = $_SESSION['contact_number'];
 			<div class="form-row" style="margin-top: 35px;">
 				<div class="col col-md-4">
 					<label>Blood Group</label>
-			   		<select class="custom-select" id="blood-type">
+			   		<select class="custom-select" id="for_patient_blood_type">
 			          	<option value="1">A+</option>
 			          	<option value="2">A-</option>
 			          	<option value="3">B+</option>
@@ -95,27 +100,27 @@ $user_contact = $_SESSION['contact_number'];
 			   	</div>
 			   	<div class="col col-md-4">
 			   		<label>Contact Number</label>
-			   		<input type="text" class="form-control" placeholder="Contact Number">
+			   		<input type="text" class="form-control" placeholder="Contact Number" id="for_patient_number">
 			   	</div>
 			</div>
 
 			<!--Doctor Information-->
-			<h4 style="margin-top: 35px;">Doctor Details</h4>
+			<h4 style="margin-top: 35px;">Doctor's Details</h4>
 			<div class="form-row">
-				<div class="col col-md-8">
+				<div class="col col-md-4">
 			   		<label>Doctor's Name</label>
-			   		<input type="text" class="form-control" placeholder="<?php echo $user_fname; ?>" disabled>
+			   		<input type="text" class="form-control" placeholder="Dr. <?php echo $user_fname." ".$user_lname; ?>" disabled>
 			   	</div>
 			   	<div class="col col-md-4">
-			   		<label>Contact Number</label>
-			   		<input type="text" class="form-control" placeholder="Contact Number">
+			   		<label>Location</label>
+			   		<input type="text" class="form-control" placeholder="Dhaka, Apollo Hospital" disabled>
 			   	</div>
 			</div>
 
 			<div class="form-row" style="margin-top: 35px;">
 				<div class="col col-md-4">
-			   		<label>Contact Number</label>
-			   		<input type="text" class="form-control" placeholder="Contact Number">
+			   		<label>Qualifications</label>
+			   		<input type="text" class="form-control" placeholder="MBBS, MCPS, FCPS, MD" disabled>
 			   	</div>
 			   	<div class="col col-md-4">
 			   		<label>Contact Number</label>

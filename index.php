@@ -31,6 +31,7 @@ $routes = [
 	'das/doctor-login' =>              'views/doctor/doctor-login.php',
 	'das/doctor-signup' =>             'views/doctor/doctor-signup.html',
 	'das/doctor-dashboard' =>          'views/doctor/doctor-dashboard.php',
+	'das/doctor-profile' =>            'views/doctor/doctor-profile.php',
 	'das/doctor/support' =>            'views/doctor/support.php',
 
 
