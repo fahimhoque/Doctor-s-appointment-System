@@ -24,6 +24,7 @@ $routes = [
 	'das/patient-account-created' =>   'views/patient/patient-account-created.php',
 	'das/patient-dashboard' =>         'views/patient/patient-dashboard.php',
 	'das/make-appointment' =>          'views/patient/make-appointment.php',
+	'das/patient-support' =>           'views/patient/patient-support.php', 
 
 
 	

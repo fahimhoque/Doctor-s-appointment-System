@@ -46,12 +46,17 @@ $user_contact = $_SESSION['contact_number'];
 		     	<br>
 				<span><?php echo "Selected Date: "; ?></span>
 				<div class="form-check">
-				    <input type="checkbox" class="form-check-input" id="book-for-me" onclick="disable_if_me();">
-				    <label class="form-check-label">Appointment for me</label>
-				</div>
-				<div class="form-check">
-				    <input type="checkbox" class="form-check-input" id="book-for-other" onclick="enable_if_other();">
-				    <label class="form-check-label">Appointment for someone else</label>
+				    <div class="col col-md-6" style="margin-left: -35px;">
+				    	<span>Who do you wish to make the appointment for?</span>
+				    	<div class="form-check form-check-inline">
+						  	<input class="form-check-input" type="radio" name="inlineRadioOptions" value="for_me" onclick="disable_if_me()">
+						  	<label class="form-check-label" for="inlineRadio1">For me</label>
+						</div>
+						<div class="form-check form-check-inline">
+						  	<input class="form-check-input" type="radio" name="inlineRadioOptions" value="for_other" onclick="enable_if_other()">
+						  	<label class="form-check-label" for="inlineRadio2">For someone else</label>
+						</div>
+				    </div>
 				</div>
 		    </div>
 		</div>
@@ -115,40 +120,25 @@ $user_contact = $_SESSION['contact_number'];
 			   		<label>Location</label>
 			   		<input type="text" class="form-control" placeholder="Dhaka, Apollo Hospital" disabled>
 			   	</div>
-			</div>
-
-			<div class="form-row" style="margin-top: 35px;">
-				<div class="col col-md-4">
+			   	<div class="col col-md-4">
 			   		<label>Qualifications</label>
 			   		<input type="text" class="form-control" placeholder="MBBS, MCPS, FCPS, MD" disabled>
 			   	</div>
-			   	<div class="col col-md-4">
-			   		<label>Contact Number</label>
-			   		<input type="text" class="form-control" placeholder="Contact Number">
-			   	</div>
-			   	<div class="col col-md-4">
-			   		<label>Contact Number</label>
-			   		<input type="text" class="form-control" placeholder="Contact Number">
-			   	</div>
 			</div>
 
-			<div class="form-row" style="margin-top: 35px;">
-				<div class="col col-md-4">
-			   		<label>Contact Number</label>
-			   		<input type="text" class="form-control" placeholder="Contact Number">
-			   	</div>
-			   	<div class="col col-md-4">
-			   		<label>Contact Number</label>
-			   		<input type="text" class="form-control" placeholder="Contact Number">
-			   	</div>
-			   	<div class="col col-md-4">
-			   		<label class="control-label" for="date">Change Date</label>
-        			<div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
-					    <input class="form-control" type="text" readonly />
-					    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			
+
+			<!-- <div class="form-row" style="margin-top: 35px;">
+				<div class="col col-md-6">
+				   	<label class="control-label" for="date">Change Date</label>
+	        		<div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+						<input class="form-control" type="text" readonly />
+						<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 					</div>
 			   	</div>
-			</div>
+			</div> -->
+
+
 			<!--Submit Button-->
 			<div class="border border-light p-3 mb-3">        
 		         <div class="text-center">
