@@ -23,7 +23,7 @@ $routes = [
 	'das/patient-signup' =>            'views/patient/patient-signup.php',
 	'das/patient-account-created' =>   'views/patient/patient-account-created.php',
 	'das/patient-dashboard' =>         'views/patient/patient-dashboard.php',
-	'das/appointment' =>               'views/patient/appointment.php',
+	'das/make-appointment' =>          'views/patient/make-appointment.php',
 
 
 	
@@ -31,7 +31,7 @@ $routes = [
 	'das/doctor-login' =>              'views/doctor/doctor-login.php',
 	'das/doctor-signup' =>             'views/doctor/doctor-signup.html',
 	'das/doctor-dashboard' =>          'views/doctor/doctor-dashboard.php',
-	'das/doctor/support' =>        'views/doctor/support.php',
+	'das/doctor/support' =>            'views/doctor/support.php',
 
 
 

@@ -16,9 +16,10 @@ if (isset($_POST['btn_login'])){
 	if ($count == 1){
 		$rows_patient = mysqli_fetch_array($result);
 		
-		$_SESSION['id']     = $rows_patient['id'];
-		$_SESSION['f_name'] = $rows_patient['f_name'];
-		$_SESSION['l_name'] = $rows_patient['l_name'];
+		$_SESSION['id']                 = $rows_patient['id'];
+		$_SESSION['f_name']             = $rows_patient['f_name'];
+		$_SESSION['l_name']             = $rows_patient['l_name'];
+		$_SESSION['contact_number']     = $rows_patient['contact_number'];
 		header('Location: patient-dashboard');
 	}
 	
