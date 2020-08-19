@@ -257,15 +257,8 @@ form input {
   height: 50px;
 }
 
-#fhourdiv {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 
-#fhourdiv > input {
-  width: 47%;
-}
+
 
 .main-header .main-form form .input-group input + input {
   margin-right: 8px;

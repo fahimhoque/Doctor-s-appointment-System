@@ -50,12 +50,11 @@ $user_lname = $_SESSION['l_name'];
 		        <li> <a class="sidebar-list-item" href="#0"> <i class="fas fa-lightbulb icon"></i><em>                Suggestions</em></a></li>
 		    </ul>
 	    </div>
-
-	    <main class="content">
-	      	<h1>hello world</h1>
-	    </main>
+	    <div class="user-info" style="margin-left: 250px">
+	    	<h4>Welcome, <?php echo $user_fname; ?></h4>
+	    </div>
+	    
 
 	</div>
 </body>
 </html>
-

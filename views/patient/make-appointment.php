@@ -126,6 +126,8 @@ $user_contact = $_SESSION['contact_number'];
 			   	</div>
 			</div>
 
+			<h5 style="margin-top: 20px;">Select Time slot</h5>
+			<p>Disbabled Fields are already booked</p>
 			
 
 			<!-- <div class="form-row" style="margin-top: 35px;">
