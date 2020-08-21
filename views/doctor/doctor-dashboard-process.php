@@ -4,6 +4,7 @@ require('views/config.php');
 $doctor_id = $_SESSION['id'];
 
 
+date_default_timezone_set("Asia/Dhaka");
 $today = date("Y-m-d");
 
 $sql = "SELECT * FROM doctor";
