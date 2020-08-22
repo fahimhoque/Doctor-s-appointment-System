@@ -143,11 +143,47 @@ $count_doctor_tickets = mysqli_num_rows($result_doctor_tickets);
                     </div>
                 </section>
             </div>
-            <div id="show-appointments">
+            <div id="show-appointments" style="margin-top: 20px;">
             	<?php echo "Today is " . $today . "<br>"; ?>
+            	
+            	<div class="container-fluid">
+            		<div class="row">
+            			<div class="col-md-4">
+            				<h5>Today's Appointment</h5>
+            				<table class="table table-stripped table-bordered text-center" id="patient-details-table">
+			            		<thead>
+			            			<th>First Name</th>
+			            			<th>Last Name</th>
+			            			<th>Gender</th>
+			            			<th>Age</th>
+			            			<th>Blood Type</th>
+			            		</thead>
+			            		<tbody id="response-patient">
+			                        <?php  
+			                               if($count_appointments_today > 0){
+			                                    while($rows_appointment_today = mysqli_fetch_array($appointments_today)){
+
+			                        ?>
+			                                        <tr>  
+			                                            <td><?php echo $rows_appointment_today['patient_fname'];?></td>
+			                                            <td><?php echo $rows_appointment_today['patient_lname'];?></td>
+			                                            <td><?php echo $rows_appointment_today['patient_gender'];?></td>
+			                                            <td><?php echo $rows_appointment_today['patient_age'];?></td>
+			                                            <td><?php echo $rows_appointment_today['patient_bloodType'];?></td>
+			                                        </tr> 
+			                        <?php
+			        
+
+			                                    }
+			                                }
+			                        ?>
+			                    </tbody>
+			            	</table>
+
+            			</div>
+            		</div>
+            	</div>            	
             </div>
-
-
 	  	</div>
 	</div>
 	
