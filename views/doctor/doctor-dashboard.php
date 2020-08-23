@@ -61,8 +61,8 @@ $count_doctor_tickets = mysqli_num_rows($result_doctor_tickets);
 		    </li>
 		    <li>
 		      <a href="#" class="wui-side-menu-item">
-		        <i class="box-ico fa fa-list-ol fa-fw"></i>
-		        <span class="box-title">Something</span> 
+		        <i class="fas fa-clipboard"></i>
+		        <span class="box-title">My Patients</span> 
 		      </a>
 		    </li>
 		    <li>
@@ -73,8 +73,8 @@ $count_doctor_tickets = mysqli_num_rows($result_doctor_tickets);
 		    </li>
 		    <li>
 		      <a href="#" class="wui-side-menu-item">
-		        <i class="box-ico fa fa-list-alt fa-fw"></i>
-		        <span class="box-title">Something</span> 
+		        <i class="fas fa-th"></i>
+		        <span class="box-title">Forum</span> 
 		      </a>
 		    </li>
 		    <li>
@@ -144,7 +144,7 @@ $count_doctor_tickets = mysqli_num_rows($result_doctor_tickets);
                 </section>
             </div>
             <div id="show-appointments" style="margin-top: 20px;">
-            	<?php echo "Today is " . $today . "<br>"; ?>
+            	
             	
             	<div class="container-fluid">
             		<div class="row">
@@ -175,6 +175,10 @@ $count_doctor_tickets = mysqli_num_rows($result_doctor_tickets);
 			        
 
 			                                    }
+			                                }
+			                                else
+			                                {
+			                                	echo "No appointments today";
 			                                }
 			                        ?>
 			                    </tbody>
