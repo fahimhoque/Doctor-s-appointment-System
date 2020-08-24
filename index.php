@@ -29,15 +29,16 @@ $routes = [
 	'das/find-doctor' =>               'views/patient/find-doctor.php',
 
 
+
 	
 	//all doctor related routes
-	'das/doctor-login' =>              'views/doctor/doctor-login.php',
-	'das/doctor-logout' =>             'views/doctor/doctor-logout.php',
-	'das/doctor-signup' =>             'views/doctor/doctor-signup.html',
-	'das/doctor-dashboard' =>          'views/doctor/doctor-dashboard.php',
-	'das/doctor-profile' =>            'views/doctor/doctor-profile.php',
-	'das/doctor/support' =>            'views/doctor/support.php',
-
+	'das/doctor-login' =>                 'views/doctor/doctor-login.php',
+	'das/doctor-logout' =>                'views/doctor/doctor-logout.php',
+	'das/doctor-signup' =>                'views/doctor/doctor-signup.html',
+	'das/doctor-dashboard' =>             'views/doctor/doctor-dashboard.php',
+	'das/doctor-profile' =>               'views/doctor/doctor-profile.php',
+	'das/doctor-support' =>               'views/doctor/support.php',
+	'das/doctor-preferences' =>           'views/doctor/doctor-preferences.php'
 
 
 ];

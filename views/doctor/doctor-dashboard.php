@@ -40,6 +40,7 @@ $count_doctor_tickets = mysqli_num_rows($result_doctor_tickets);
 	<script src="views/doctor/scripts/doctor-dashboard.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="views/doctor/style/doctor-dashboard.css">
 	    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -78,18 +79,24 @@ $count_doctor_tickets = mysqli_num_rows($result_doctor_tickets);
 		      </a>
 		    </li>
 		    <li>
-		      <a href="doctor/support" class="wui-side-menu-item">
+		      <a href="doctor-support" class="wui-side-menu-item">
 		        <i class="fas fa-tags"></i>
 		        <span class="box-title">Support</span> 
 		      </a>
 		    </li>
 		    <li>
-		      <a href="#" class="wui-side-menu-item">
-		        <i class="fas fa-cogs"></i>
-		        <span class="box-title">Settings</span> 
+		      <a href="doctor-profile" class="wui-side-menu-item">
+		        <i class="fas fa-user"></i>
+		        <span class="box-title">Profile</span> 
 		      </a>
 		    </li>
-		    <li style="margin-top: 520px;">
+		    <li>
+		      <a href="doctor-preferences" class="wui-side-menu-item">
+		        <i class="fas fa-cogs"></i>
+		        <span class="box-title">Preferences</span> 
+		      </a>
+		    </li>
+		    <li style="margin-top: 450px;">
 		      <a href="doctor-logout" class="wui-side-menu-item">
 		        <i class="fas  fa-power-off"></i>
 		        <span class="box-title">Logout</span> 
@@ -150,6 +157,7 @@ $count_doctor_tickets = mysqli_num_rows($result_doctor_tickets);
             		<div class="row">
             			<div class="col-md-4">
             				<h5>Today's Appointment</h5>
+            				<h6>Date : <?php echo $today?></h6>
             				<table class="table table-stripped table-bordered text-center" id="patient-details-table">
 			            		<thead>
 			            			<th>First Name</th>
