@@ -17,7 +17,7 @@
 	  	<ul class="menu">
 	    	<li><a href="" class="active">Home</a></li>
 	    	<li><a href="find-blood">Find Blood</a></li>
-	    	<li><a href="patient-login">Patient</a></li>
+	    	<li><a href="user-login">User</a></li>
 	    	<li><a href="doctor-login">Doctor</a></li>
 	    	<li><a href="admin-login">Admin</a></li>
 	  	</ul>

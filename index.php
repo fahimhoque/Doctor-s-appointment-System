@@ -19,14 +19,14 @@ $routes = [
 
 
 	//all patient related routes
-	'das/patient-login' =>             'views/patient/patient-login.php',
+	'das/user-login' =>             'views/user/user-login.php',
 
-	'das/patient-signup' =>            'views/patient/patient-signup.php',
-	'das/patient-account-created' =>   'views/patient/patient-account-created.php',
-	'das/patient-dashboard' =>         'views/patient/patient-dashboard.php',
-	'das/make-appointment' =>          'views/patient/make-appointment.php',
-	'das/patient-support' =>           'views/patient/patient-support.php', 
-	'das/find-doctor' =>               'views/patient/find-doctor.php',
+	'das/user-signup' =>            'views/user/user-signup.php',
+	'das/user-account-created' =>   'views/user/user-account-created.php',
+	'das/user-dashboard' =>         'views/user/user-dashboard.php',
+	'das/make-appointment' =>          'views/user/make-appointment.php',
+	'das/user-support' =>           'views/user/user-support.php', 
+	'das/find-doctor' =>               'views/user/find-doctor.php',
 
 
 

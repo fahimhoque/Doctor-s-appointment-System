@@ -8,7 +8,7 @@ if (isset($_POST['btn_login'])){
 	$email = $_POST['email_patient'];
 	$password = $_POST['password_patient'];
 
-	$query = "SELECT * FROM `patient` WHERE email='$email' and password='$password'";
+	$query = "SELECT * FROM `user` WHERE email='$email' and password='$password'";
 	 
 	$result = mysqli_query($conn, $query) or die(mysqli_error($conn));
 	$count = mysqli_num_rows($result);
@@ -20,7 +20,7 @@ if (isset($_POST['btn_login'])){
 		$_SESSION['f_name']             = $rows_patient['f_name'];
 		$_SESSION['l_name']             = $rows_patient['l_name'];
 		$_SESSION['contact_number']     = $rows_patient['contact_number'];
-		header('Location: patient-dashboard');
+		header('Location: user-dashboard');
 	}
 	
 	else{
