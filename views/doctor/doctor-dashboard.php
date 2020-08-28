@@ -38,11 +38,15 @@ $count_doctor_tickets = mysqli_num_rows($result_doctor_tickets);
 <head>
 	<title>Dashboard: DOCTOR</title>
 	<script src="views/doctor/scripts/doctor-dashboard.js"></script>
+	
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
 	<link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+
 	<link rel="stylesheet" type="text/css" href="views/doctor/style/doctor-dashboard.css">
-	    <!-- Latest compiled and minified CSS -->
+	<!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 <body>

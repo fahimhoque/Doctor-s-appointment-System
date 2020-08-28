@@ -34,7 +34,7 @@ if (isset($_POST['btn_login'])){
 <html>
 <head>
 	<title>Patient Login</title>
-	<link rel="stylesheet" type="text/css" href="views/patient/style/patient-login.css">
+	<link rel="stylesheet" type="text/css" href="views/user/style/user-login.css">
 </head>
 <body>
   	<div class="container">
