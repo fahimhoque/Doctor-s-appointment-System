@@ -8,6 +8,12 @@ $rows_user =  mysqli_fetch_array($result_user);
 
 date_default_timezone_set('UTC');
 
+//today's appointment for user
+
+$today = date("Y-m-d");
+$sql_todays_appointment = "SELECT * FROM APPOINTMENT WHERE user_id = '$user_id' AND appointment_date = '$today'";
+$result_todays_appointment = mysqli_query($conn, $sql_todays_appointment);
+$count_todays_appointment = mysqli_num_rows($result_todays_appointment);
 
 if (isset($_POST['btn_find'])){
 	$city_name = $_POST['City'];
@@ -23,7 +29,7 @@ if (isset($_POST['btn_find'])){
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Dashboard <?php echo $user_id?></title>
+	<title>Dashboard: <?php echo $rows_user['f_name']?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!--JQuery CDN-->
 	
@@ -37,6 +43,9 @@ if (isset($_POST['btn_find'])){
 	<!--Google Font-->
 	<link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
 
+
+	<!--Bootstrap CDN-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<!--Custom CSS-->
 	<link rel="stylesheet" type="text/css" href="views/user/style/navbar.css">
 	<link rel="stylesheet" type="text/css" href="views/user/style/user-dashboard.css">
@@ -100,62 +109,132 @@ if (isset($_POST['btn_find'])){
 		    <a href="#" class="wui-side-menu-trigger"><i class="fa fa-bars"></i></a>
 		</div>
 
+		<!-- <h3 style="margin-left: 10px; margin-top: 30px;"><?php //echo $rows_user['f_name']." ".$rows_user['l_name']." # ".$rows_user['id']?></h3> -->
+	 	<div class="wui-content-main">	 		
+			<div class="container" style="margin-top: 50px;">
+				<div class="row">
 
-	 	<div class="wui-content-main">
-	 		<h5 style="margin-left: 10px; margin-top: 30px;"><?php echo $rows_user['f_name']." ".$rows_user['l_name']?></h5>
-	 		<form method="POST" action="">
-				<input type="text" name="City">
-				<select name="specialization">
-					<option value="Opthalmologist">Opthalmologist</option>
-					<option value="Medicine">Medicine</option>
-				</select>
-				<!-- <input type="date" name="date">
-				<input type="time" name="time"> -->
-				<input type="submit" value="Submit" name="btn_find" id="btn_find">
-			</form>
-			<div id="show-doctor">
-				<table>
-					<thead>
-						<th>ID</th>
-						<th>First Name</th>
-						<th>Start Time</th>
-						<th>End Time</th>
-						<th>Action</th>
-					</thead>
-				
-					<?php
-					if(isset($count) && $count > 0)
-					{
-						while($rows =  mysqli_fetch_array($result)){
-					?>
-					<tr>
-						<td><?php echo $rows['id'];?></td>
-						<td><?php echo $rows['f_name']; ?></td>
-						<td><?php echo date('h A', strtotime($rows['start_time'])) ;?></td>
-						<td><?php echo date('h A', strtotime($rows['end_time'])) ;?></td>
-						<td>
-							<a href="make-appointment" target="_blank" class="make-appointment-process" id="<?php echo $rows['id'];?>">Expand</a>
-						</td> 
-						<td>
-							<select>
-								<option>A</option>
-								<option>B</option>
-								<option>C</option>
-							</select>
+					<!-- Today's appointment -->
+					<div class="col-md-6" style="margin-left: -120px; margin-right: 80px;">
+						<h4>Today's Appointment</h4>
+						<form action="" method="POST">
+							<div class="form-group row">
+								<div class="col-md-8">
+									<label class="my-1 mr-2">Appointment ID:</label>
+									<input type="text" class="form-control mb-2 mr-sm-2 disabled" name="City">
+								</div>
+								
+								<div class="col-md-4">
+									<label class="my-1 mr-2 selectpicker">Search</label>
+									<input class="btn btn-success form-control" type="submit" value="Find">
+								</div>
+							</div>
+						</form>
+						<table class="table table-borderless table-hover">
+			                <thead>
+			                    <th>Appointment ID</th>
+			                    <th>Date</th>
+			                    <th>Doctor's name</th>
+			                    <th>Patient's Name</th>
+			                    
+			                        
+			                </thead>
 
-						</td>
+			                <tbody>
+			                    <?php  
+			                        if($count_todays_appointment > 0){
+			                            while($rows_todays_appointment = mysqli_fetch_array($result_todays_appointment)){
 
-					</tr>
-					
-					
+			                    ?>
+			                    <tr>
+			                         <td><?php echo $rows_todays_appointment['appointment_id'];?></td>
+			                         <td><?php echo $rows_todays_appointment['appointment_date'];?></td>
+			                         <td><?php echo $rows_todays_appointment['doctor_id'];?></td>
+			                         <td><?php echo $rows_todays_appointment['patient_fname']." ".$rows_todays_appointment['patient_lname'];?></td>
+			                    </tr> 
+			                    <?php
+			        
 
-					<?php
-						}
-					}
-					?>
-				</table>
-				
+			                            }
+			                        }
+			                        else
+			                        {
+			                        	echo "No appointment for today";
+			                        }
+			                    ?>
+			                </tbody>
+                		</table>
+					</div>
+
+
+
+
+					<!-- Search Doctor -->
+					<div class="col-md-6">
+
+						<h4>Find New Appointment</h4>
+						<form action="" method="POST">
+							<div class="form-group row">
+								<div class="col-md-4">
+									<label class="my-1 mr-2">City</label>
+									<input type="text" class="form-control mb-2 mr-sm-2" name="City">
+								</div>
+								<div class="col-md-4">
+									<label class="my-1 mr-2 selectpicker">Type</label>
+									<select class="form-control" name="specialization">
+										<option value="Opthalmologist">Opthalmologist</option>
+										<option>Medicine</option>
+										<option>Neurologist</option>
+										<option>Dentist</option>
+									</select>
+								</div>
+								<div class="col-md-4">
+									<label class="my-1 mr-2 selectpicker">Search</label>
+									<input class="btn btn-success form-control" name="btn_find" type="submit" value="Find">
+								</div>
+							</div>
+						</form>
+						<div id="show-doctor">
+							<table class="table table table-borderless table-hover text-center">
+			                    <thead>
+			                        <th>ID</th>
+			                        <th>First Name</th>
+			                        <th>Last Name</th>
+			                        <th>Start Time</th>
+			                        <th>End Time</th>
+			                        <th>Action</th>
+			                        
+			                    </thead>
+
+			                    <tbody>
+			                        <?php  
+			                               if(isset($count) && $count > 0){
+			                                    while($rows = mysqli_fetch_array($result)){
+
+			                                        ?>
+			                                        <tr>
+			                                            <td><?php echo $rows['id'];?> </td>
+			                                            <td><?php echo $rows['f_name'];?></td>
+			                                            <td><?php echo $rows['l_name'];?></td>
+			                                            <td><?php echo date('h A', strtotime($rows['start_time'])) ;?></td>
+														<td><?php echo date('h A', strtotime($rows['end_time'])) ;?></td>
+			                                            <!-- <td><button class="make-appointment-process" id="<?php //echo $rows['id'];?>">action</button></td> -->
+			                                            <td><a href="make-appointment?doctor_id=<?php echo $rows['id'];?>">Expand</a></td>
+			                                        </tr> 
+			                                        <?php
+			        
+
+			                                    }
+			                                }
+			                        ?>
+			                    </tbody>
+                			</table>
+							
+						</div>
+					</div>
+				</div>
 			</div>
+			
 		</div>
 		<div id="two">
 			
@@ -177,6 +256,7 @@ if (isset($_POST['btn_find'])){
 
 	                success:function(data){  
 	                    console.log(doctor_id);
+	                    console.log(data);
 	                }  
 	            });  
 	        }            
@@ -184,5 +264,3 @@ if (isset($_POST['btn_find'])){
 	</script>
 </body>
 </html>
-
-

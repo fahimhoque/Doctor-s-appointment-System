@@ -1,7 +1,9 @@
 <?php
-	$get_doctor_id = $_POST['doctor_id'];
+
+$x = $_GET['doctor_id'];
 
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -9,7 +11,10 @@
 	<title>Make Appointment</title>
 </head>
 <body>
-	<h3><?php echo $get_doctor_id ?></h3>
+	<?php
+		echo "string".$x;
+
+	?>
 
 </body>
 </html>
