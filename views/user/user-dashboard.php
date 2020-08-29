@@ -133,14 +133,9 @@ if (isset($_POST['btn_find'])){
 						<td><?php echo $rows['f_name']; ?></td>
 						<td><?php echo date('h A', strtotime($rows['start_time'])) ;?></td>
 						<td><?php echo date('h A', strtotime($rows['end_time'])) ;?></td>
-						<!-- <td>
-							<input type="submit" class="make-appointment" name="submit_btn" 
-							value="Expand" id="<?php //echo $rows['id'];?>">
-						</td> -->
-
 						<td>
 							<a href="make-appointment" target="_blank" class="make-appointment-process" id="<?php echo $rows['id'];?>">Expand</a>
-						</td>
+						</td> 
 						<td>
 							<select>
 								<option>A</option>
@@ -162,25 +157,30 @@ if (isset($_POST['btn_find'])){
 				
 			</div>
 		</div>
+		<div id="two">
+			
+		</div>
+	</div>
+
 	<div class="wui-overlay"></div>
 	
 	
 	<script type="text/javascript">
 		$(document).on('click', '.make-appointment-process', function(){  
-        var doctor_id = $(this).attr("id");  
-        if(doctor_id != '')  
-        {  
-            $.ajax({  
-                url:"views/user/make-appointment.php",  
-                method:"POST",  
-                data:{doctor_id:doctor_id},
-                dataType:"json",   
-                success:function(data){  
-                    console.log(doctor_id);  
-                }  
-            });  
-        }            
-    });
+	        var doctor_id = $(this).attr("id");  
+	        if(doctor_id != '')  
+	        {  
+	            $.ajax({  
+	                url:"make-appointment",  
+	                method:"POST",  
+	                data:{doctor_id:doctor_id},
+
+	                success:function(data){  
+	                    console.log(doctor_id);
+	                }  
+	            });  
+	        }            
+	    });
 	</script>
 </body>
 </html>

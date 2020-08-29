@@ -1,25 +1,15 @@
 <?php
-if(isset($_POST["doctor_id"]))
-{
-	$x = $_POST["doctor_id"];
-	echo "HELLLO EVRYONE ".$x;
-}
+	$get_doctor_id = $_POST['doctor_id'];
 
 ?>
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html>
 <head>
- 	<title>Make Appointment</title>
+	<title>Make Appointment</title>
 </head>
 <body>
-	<?php echo "ID: ".$x ?>
- 
+	<h3><?php echo $get_doctor_id ?></h3>
+
 </body>
 </html>

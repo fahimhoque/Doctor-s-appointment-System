@@ -1,5 +1,5 @@
 <?php  
-require('config.php');
+require('models/config.php');
 session_start();
 
 if (isset($_POST['btn_login'])){
