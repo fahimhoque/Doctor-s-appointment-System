@@ -1,5 +1,4 @@
 <?php
-	session_start();
 	require_once 'models/config.php';
 	$name          ="";
 	$err_name      ="";
@@ -13,7 +12,6 @@
 			//authenticate
 			if(authenticate($_POST["email"],$_POST["password"])){
 				header("Location: user-dashboard");
-				// header("Location: views/test.php");
 			}else{
 				echo "Username password invalid";
 			}
@@ -24,7 +22,6 @@
 		// $password = md5($password);
 		$query = "SELECT * FROM `user` WHERE email='$email' and password='$password'";
 		$user=getArray($query);
-		$_SESSION['user_id'] = $user['id']; 
 		return $user;
 	}
 

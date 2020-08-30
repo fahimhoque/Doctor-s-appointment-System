@@ -1,7 +1,7 @@
 <?php
 require('views/config.php');
 session_start();
-$user_id = $_SESSION['id'];
+$user_id = $_SESSION['user_id'];
 $sql_user = "SELECT * FROM USER WHERE id = '$user_id'";
 $result_user = mysqli_query($conn, $sql_user);
 $rows_user =  mysqli_fetch_array($result_user);
@@ -30,6 +30,7 @@ if (isset($_POST['btn_find'])){
 <html>
 <head>
 	<title>Dashboard: <?php echo $rows_user['f_name']?></title>
+
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!--JQuery CDN-->
 	
@@ -68,7 +69,7 @@ if (isset($_POST['btn_find'])){
 		    <li>
 		      <a href="#" class="wui-side-menu-item">
 		        <i class="fas fa-medkit"></i>
-		        <span class="box-title">Find Doctor</span> 
+		        <span class="box-title">History</span> 
 		      </a>
 		    </li>
 		    <li>
@@ -116,6 +117,7 @@ if (isset($_POST['btn_find'])){
 
 					<!-- Today's appointment -->
 					<div class="col-md-6" style="margin-left: -120px; margin-right: 80px;">
+						<h4><?php echo $_SESSION['user_id']?></h4>
 						<h4>Today's Appointment</h4>
 						<form action="" method="POST">
 							<div class="form-group row">
@@ -182,7 +184,7 @@ if (isset($_POST['btn_find'])){
 								<div class="col-md-4">
 									<label class="my-1 mr-2 selectpicker">Type</label>
 									<select class="form-control" name="specialization">
-										<option value="Opthalmologist">Opthalmologist</option>
+										<option value="Opthalmologist">Eye Specialist</option>
 										<option>Medicine</option>
 										<option>Neurologist</option>
 										<option>Dentist</option>
