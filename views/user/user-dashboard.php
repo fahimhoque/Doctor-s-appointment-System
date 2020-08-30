@@ -109,7 +109,14 @@ if (isset($_POST['btn_find'])){
 		<div class="wui-content-header">
 		    <a href="#" class="wui-side-menu-trigger"><i class="fa fa-bars"></i></a>
 		</div>
-
+		
+		<div class="container">
+			<div class="row">
+				<div class="col-md-2">
+					<h4 style="margin-top: 20px;"><?php echo $_SESSION['user_id']?></h4>
+				</div>
+			</div>
+		</div>
 		<!-- <h3 style="margin-left: 10px; margin-top: 30px;"><?php //echo $rows_user['f_name']." ".$rows_user['l_name']." # ".$rows_user['id']?></h3> -->
 	 	<div class="wui-content-main">	 		
 			<div class="container" style="margin-top: 50px;">
@@ -117,13 +124,13 @@ if (isset($_POST['btn_find'])){
 
 					<!-- Today's appointment -->
 					<div class="col-md-6" style="margin-left: -120px; margin-right: 80px;">
-						<h4><?php echo $_SESSION['user_id']?></h4>
+						
 						<h4>Today's Appointment</h4>
 						<form action="" method="POST">
 							<div class="form-group row">
 								<div class="col-md-8">
 									<label class="my-1 mr-2">Appointment ID:</label>
-									<input type="text" class="form-control mb-2 mr-sm-2 disabled" name="City">
+									<input type="text" class="form-control mb-2 mr-sm-2" name="" placeholder="Not yet available" readonly>
 								</div>
 								
 								<div class="col-md-4">
@@ -220,8 +227,7 @@ if (isset($_POST['btn_find'])){
 			                                            <td><?php echo $rows['l_name'];?></td>
 			                                            <td><?php echo date('h A', strtotime($rows['start_time'])) ;?></td>
 														<td><?php echo date('h A', strtotime($rows['end_time'])) ;?></td>
-			                                            <!-- <td><button class="make-appointment-process" id="<?php //echo $rows['id'];?>">action</button></td> -->
-			                                            <td><a href="make-appointment?doctor_id=<?php echo $rows['id'];?>">Expand</a></td>
+			                                            <td><a target="_blank" href="make-appointment?doctor_id=<?php echo $rows['id'];?>">Expand</a></td>
 			                                        </tr> 
 			                                        <?php
 			        
@@ -238,9 +244,7 @@ if (isset($_POST['btn_find'])){
 			</div>
 			
 		</div>
-		<div id="two">
-			
-		</div>
+		
 	</div>
 
 	<div class="wui-overlay"></div>
