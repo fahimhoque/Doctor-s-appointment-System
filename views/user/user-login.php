@@ -1,6 +1,6 @@
 <?php 
 require_once 'models/config.php';
-require_once 'controller/userLoginController.php';
+require_once 'controller/user/userLoginController.php';
 
 
 ?>

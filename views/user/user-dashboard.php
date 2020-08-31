@@ -1,6 +1,8 @@
 <?php
-require('views/config.php');
 session_start();
+require('views/config.php');
+
+
 $user_id = $_SESSION['user_id'];
 $sql_user = "SELECT * FROM USER WHERE id = '$user_id'";
 $result_user = mysqli_query($conn, $sql_user);
@@ -18,6 +20,7 @@ $count_todays_appointment = mysqli_num_rows($result_todays_appointment);
 if (isset($_POST['btn_find'])){
 	$city_name = $_POST['City'];
 	$specialization = $_POST['specialization'];
+	$date = $_POST['date'];
 	$sql_find = "SELECT * FROM DOCTOR WHERE specialization =  '$specialization' AND city = '$city_name' ";
 	$result = mysqli_query($conn, $sql_find);
 	$count = mysqli_num_rows($result);
@@ -141,7 +144,7 @@ if (isset($_POST['btn_find'])){
 								
 								<div class="col-md-4">
 									<label class="my-1 mr-2 selectpicker">Search</label>
-									<input class="btn btn-success form-control" type="submit" value="Find">
+									<input class="btn btn-success form-control disabled" type="submit" value="Find">
 								</div>
 							</div>
 						</form>
@@ -179,6 +182,7 @@ if (isset($_POST['btn_find'])){
 			                    ?>
 			                </tbody>
                 		</table>
+
 					</div>
 
 
@@ -209,7 +213,8 @@ if (isset($_POST['btn_find'])){
 							<div class="row">
 								<div class="col-md-4 form-group"> <!-- Date input -->
 							        <label class="control-label" for="date">Date</label>
-							        <input class="form-control" type="date" name="date">
+							        <input class="form-control" type="date" name="date" value="<?php echo date('Y-m-d') ?>">
+
 							    </div>	
 							    <div class="col-md-4">
 									<label class="my-1 mr-2 selectpicker">Search</label>
@@ -241,7 +246,12 @@ if (isset($_POST['btn_find'])){
 			                                            <td><?php echo $rows['l_name'];?></td>
 			                                            <td><?php echo date('h A', strtotime($rows['start_time'])) ;?></td>
 														<td><?php echo date('h A', strtotime($rows['end_time'])) ;?></td>
-			                                            <td><a target="_blank" href="make-appointment?doctor_id=<?php echo $rows['id'];?>">Expand</a></td>
+			                                            <td>
+			                                            	<a target="_blank" 
+			                                            	href="make-appointment?doctor_id=<?php echo $rows['id'];?>&date=<?php echo $_POST['date']; ?>">
+			                                            		Expand
+			                                            	</a>
+			                                            </td>
 			                                        </tr> 
 			                                        <?php
 			        
