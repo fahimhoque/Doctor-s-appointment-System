@@ -3,11 +3,14 @@ session_start();
 require('views/config.php');
 require('views/user/time-slot.php');
 require('controller/user/getUserDetails.php');
+require('controller/doctor/getDoctorDetails.php');
+
 
 $user_id                    = $_SESSION['user_id'];
 $doctor_id                  = $_GET['doctor_id'];
 $selected_date              = $_GET['date'];
-
+$user_data                  =  mysqli_fetch_array(getUserData($user_id));
+$doctor_data                =  mysqli_fetch_array(getDoctorData($doctor_id));
 
 $sql = "SELECT * FROM DOCTOR WHERE id = '$doctor_id'";
 $result = mysqli_query($conn, $sql);
@@ -50,22 +53,43 @@ $availableSlots = array_diff(array_merge($bookedTimes, $timeslots), array_inters
 	 	<form action="" method="POST">
 	 		<!--User Information-->
 	 		<div class="row">
+	 			<div class="col-md-12">
+	 				<h4><b>User Details</b></h4>
+	 			</div>
 	 			<div class="col-md-4">
 	 				<label>User Id</label>
-	 				<input type="text" class="form-control" placeholder="<?php echo $user_id?>" readonly>
+	 				<input type="text" name="user_id" 
+	 					class="form-control"  
+	 					placeholder="<?php echo $user_id; ?>" 
+	 				readonly>
 	 			</div>
 	 			<div class="col-md-4">
 	 				<label>User Name</label>
-	 				<input type="text" class="form-control" placeholder="<?php echo $user_id?>" readonly>
+	 				<input type="text" 
+	 					name="username"
+	 					class="form-control" 
+	 					placeholder="<?php echo $user_data['f_name']." ".$user_data['l_name']; ?>" 
+	 				readonly>
 	 			</div>
+
+	 			<div class="col-md-4">
+	 				<label>User Contact</label>
+		  			<input type="text"
+		  				name="user_contact" 
+		  				class="form-control" 
+		  				placeholder="<?php echo $user_data['contact_number']; ?>"
+		  			readonly>
+		  		</div>
 	 		</div>
 
 
 
 
 		  	<div class="row" style="margin-top: 35px;">
+		  		<div class="col-md-12">
+	 				<h4><b>Patient Details</b></h4>
+	 			</div>
 		    	<div class="col-md-4">
-
 		      		<input type="text" class="form-control" placeholder="Patient First name">
 		    	</div>
 		    	<div class="col-md-4">
@@ -74,6 +98,7 @@ $availableSlots = array_diff(array_merge($bookedTimes, $timeslots), array_inters
 		    	<div class="col-md-4">
 		  			<input type="text" class="form-control" placeholder="Contact">
 		  		</div>
+		  		
 		  	</div>
 		  	<div class="row" style="margin-top: 35px;">
 		  		<div class="col-md-4">
@@ -100,26 +125,82 @@ $availableSlots = array_diff(array_merge($bookedTimes, $timeslots), array_inters
 		      		</select>
 		    	</div>		  		
 		  	</div>
+
+		  	<!--Start of Doctor Details Segment-->
+		  	<div class="row" style="margin-top: 35px;">
+		  		<div class="col-md-12">
+	 				<h4><b>Doctor Details</b></h4>
+	 			</div>
+		  		<div class="col-md-4">
+	 				<label>Name</label>
+		  			<input type="text"
+		  				name="user_contact" 
+		  				class="form-control" 
+		  				placeholder="<?php echo $doctor_data['id']; ?>"
+		  			readonly>
+		  		</div>
+		  		<div class="col-md-4">
+	 				<label>Name</label>
+		  			<input type="text"
+		  				name="user_contact" 
+		  				class="form-control" 
+		  				placeholder="<?php echo $doctor_data['f_name']." ".$doctor_data['l_name']; ?>"
+		  			readonly>
+		  		</div>
+		  		<div class="col-md-4">
+	 				<label>Name</label>
+		  			<input type="text"
+		  				name="user_contact" 
+		  				class="form-control" 
+		  				placeholder="<?php echo $doctor_data['f_name']." ".$doctor_data['l_name']; ?>"
+		  			readonly>
+		  		</div>
+		  	</div>
+
+		  	<div class="row" style="margin-top: 35px;">
+		 		<div class="col-md-4">
+		 			<select class="form-control" name="">
+			 			<?php
+							foreach ($availableSlots as $as) {
+						?>	
+								<option><?php echo $as; ?></option>
+						<?php
+				 			}
+				 		?>
+			 		</select>
+		 		</div>
+		 		<div class="col-md-4">
+		 			<select class="form-control" name="">
+			 			<?php
+							foreach ($availableSlots as $as) {
+						?>	
+								<option><?php echo $as; ?></option>
+						<?php
+				 			}
+				 		?>
+			 		</select>
+		 		</div>
+		 		<div class="col-md-4">
+		 			<select class="form-control" name="">
+			 			<?php
+							foreach ($availableSlots as $as) {
+						?>	
+								<option><?php echo $as; ?></option>
+						<?php
+				 			}
+				 		?>
+			 		</select>
+		 		</div>
+		 	</div>
+			<!--End of Doctor Details Segment-->
+		  	
+
 		  	<div class="row" style="margin-top: 35px;">
 		  		<div class="col-md-2">
 		  			<input class="btn btn-success form-control" name="" type="submit" value="Sbmit">
 		  		</div>
 		  	</div>
-		</form>
-	 	<h3>Available times</h3>
-	 	<div class="row">
-	 		<div class="col-md-4">
-	 			<select class="form-control" name="">
-		 			<?php
-						foreach ($availableSlots as $as) {
-					?>	
-							<option><?php echo $as; ?></option>
-					<?php
-			 			}
-			 		?>
-		 		</select>
-	 		</div>
-	 	</div>
+		</form>	
 	</div>
 	
 	
