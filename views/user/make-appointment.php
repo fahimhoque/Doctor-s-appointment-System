@@ -14,7 +14,7 @@ $start_time = $rows['start_time'];
 $end_time   = $rows['end_time'];
 $duration = 30;
 $cleanup = $rows['cleanup_m'];
-
+$timeslots = timeslots($duration, $cleanup, $start_time, $end_time);
 
 ?>
 
@@ -28,16 +28,18 @@ $cleanup = $rows['cleanup_m'];
 <body>
 	 <div class="container">
 	 	<div class="row">
-	 		<?php
-	 			$timeslots = timeslots($duration, $cleanup, $start_time, $end_time);
-	 			foreach ($timeslots as $ts) {
-	 		?>	
-	 		<div class="col-md-2">
-	 			<button class="btn btn-success"><?php echo $ts; ?></button>
-	 		</div>		
-	 		<?php
-	 			}
-	 		?>
+	 		<div class="col-md-4">
+	 			<select class="form-control" name="specialization">
+		 			<?php
+						foreach ($timeslots as $ts) {
+					?>	
+					<option><?php echo $ts; ?></option>
+					<?php
+			 			}
+			 		?>
+		 		</select>
+	 		</div>
+	 		
 	 	</div>
 	 </div>
 	

@@ -12,11 +12,12 @@ function timeslots($duration, $cleanup, $start, $end){
 		if ($endPeriod>$end) {
 			break;
 		}
-		$slots[] = $intStart->format("h:i A")." - ".$endPeriod->format("h:i A");
+		$slots[] = $intStart->format("h:i A");
 	}
 	return $slots;
 
 }
 
 
-?>
+?><!-- 
+." - ".$endPeriod->format("h:i A") -->
