@@ -54,17 +54,17 @@ $availableSlots = array_diff(array_merge($bookedTimes, $timeslots), array_inters
 	 		<!--User Information-->
 	 		<div class="row">
 	 			<div class="col-md-12">
-	 				<h4><b>User Details</b></h4>
+	 				<h4><b>User's Details</b></h4>
 	 			</div>
 	 			<div class="col-md-4">
-	 				<label>User Id</label>
+	 				<label>User's Id</label>
 	 				<input type="text" name="user_id" 
 	 					class="form-control"  
 	 					placeholder="<?php echo $user_id; ?>" 
 	 				readonly>
 	 			</div>
 	 			<div class="col-md-4">
-	 				<label>User Name</label>
+	 				<label>User's Name</label>
 	 				<input type="text" 
 	 					name="username"
 	 					class="form-control" 
@@ -73,7 +73,7 @@ $availableSlots = array_diff(array_merge($bookedTimes, $timeslots), array_inters
 	 			</div>
 
 	 			<div class="col-md-4">
-	 				<label>User Contact</label>
+	 				<label>User's Contact Number</label>
 		  			<input type="text"
 		  				name="user_contact" 
 		  				class="form-control" 
@@ -132,7 +132,7 @@ $availableSlots = array_diff(array_merge($bookedTimes, $timeslots), array_inters
 	 				<h4><b>Doctor Details</b></h4>
 	 			</div>
 		  		<div class="col-md-4">
-	 				<label>Name</label>
+	 				<label>Doctor's ID</label>
 		  			<input type="text"
 		  				name="user_contact" 
 		  				class="form-control" 
@@ -140,7 +140,7 @@ $availableSlots = array_diff(array_merge($bookedTimes, $timeslots), array_inters
 		  			readonly>
 		  		</div>
 		  		<div class="col-md-4">
-	 				<label>Name</label>
+	 				<label>Doctor's Name</label>
 		  			<input type="text"
 		  				name="user_contact" 
 		  				class="form-control" 
@@ -148,7 +148,7 @@ $availableSlots = array_diff(array_merge($bookedTimes, $timeslots), array_inters
 		  			readonly>
 		  		</div>
 		  		<div class="col-md-4">
-	 				<label>Name</label>
+	 				<label>Doctor's Qualifications</label>
 		  			<input type="text"
 		  				name="user_contact" 
 		  				class="form-control" 
@@ -197,7 +197,7 @@ $availableSlots = array_diff(array_merge($bookedTimes, $timeslots), array_inters
 
 		  	<div class="row" style="margin-top: 35px;">
 		  		<div class="col-md-2">
-		  			<input class="btn btn-success form-control" name="" type="submit" value="Sbmit">
+		  			<input class="btn btn-success form-control" name="btn_submit" type="submit" value="Sbmit">
 		  		</div>
 		  	</div>
 		</form>	
