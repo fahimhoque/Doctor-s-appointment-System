@@ -1,51 +1,48 @@
 <?php
-	require('models/config.php');
+	require_once 'models/config.php';
 
-	$appointment_date  = ;
-	$appointment_time  = ;
-	$user_id           = ;
-	$doctor_id         = ;
-	$patient_fname     = ;
-	$patient_lname     = ;
-	$patient_contact   = ;
-	$patient_gender    = ;
-	$patient_age       = ;
-	$patient_bloodtype = ;
+	$hasError          = false;
  
 	if(isset($_POST["btn_submit"])){
-		//validation
+		$appointment_date  = $_POST['appointment_date'];
+		$appointment_time  = $_POST['appointment_time'];
+		$user_id           = $_POST['user_id'];
+		$doctor_id         = $_POST['doctor_id'];
+		$patient_fname     = $_POST['patient_fname'];
+		$patient_lname     = $_POST['patient_lname'];
+		$patient_contact   = $_POST['patient_contact'];
+		$patient_gender    = $_POST['patient_gender'];
+		$patient_age       = $_POST['patient_age'];
+		$patient_bloodtype = $_POST['patient_bloodType'];
+
 		if(!$hasError){
-			//authenticate
-			if(make_appointment($appointment_date,
-								$appointment_time, $user_id, $doctor_id, 
-								$patient_fname, $patient_lname, 
-								$patient_contact, $patient_gender,
-								$patient_age, $patient_bloodtype))
-			{
+			if(make_appointment($appointment_date,$appointment_time,$user_id, $doctor_id, $patient_fname, $patient_lname, $patient_contact, $patient_gender,
+								$patient_age, $patient_bloodtype)){
 				header("Location: user-dashboard");
-				
-			}else{
-				echo "Something went wrong";
+			}else
+			{
+				// echo '<script>alert("Something went  wrong")</script>';
+				header("Location: user-dashboard");
 			}
 		}
 	}
 	
-	function make_appointment($appointment_date,
-								$appointment_time, $user_id, $doctor_id, 
-								$patient_fname, $patient_lname,$patient_contact, $patient_gender,
+	function make_appointment($appointment_date,$appointment_time,$user_id, $doctor_id, $patient_fname, $patient_lname, $patient_contact, $patient_gender,
 								$patient_age, $patient_bloodtype){
 		// $password = md5($password);
 		$query = "INSERT INTO 
-					appointment (appointment_date, appointment_time, 
+					appointment (appointment_date, appointment_time,
 								user_id, doctor_id, patient_fname, 
 								patient_lname,patient_contact, patient_gender, 
 								patient_age, patient_bloodtype) 
 
-					VALUES ('$appointment_date','$appointment_time','$user_id',
-							'$doctor_id','$patient_fname','$patient_lname','$patient_gender','$patient_contact','$patient_age','$patient_bloodtype') ";
+					VALUES ('$appointment_date', STR_TO_DATE('$appointment_time', '%l:%i %p' ),
+							'$user_id', '$doctor_id', '$patient_fname',
+						    '$patient_lname', '$patient_contact', '$patient_gender',
+						    '$patient_age', '$patient_bloodtype') ";
 
-		$booked = execute($query);
-		return $booked;
+		execute($query);
+		
 	}
 
 

@@ -1,9 +1,10 @@
 <?php
 session_start();
-require('views/config.php');
-require('views/user/time-slot.php');
-require('controller/user/getUserDetails.php');
-require('controller/doctor/getDoctorDetails.php');
+require_once 'views/config.php';
+require_once 'views/user/time-slot.php';
+require_once 'controller/user/getUserDetails.php';
+require_once 'controller/doctor/getDoctorDetails.php';
+require_once 'controller/user/makeAppointmentController.php';
 
 
 $user_id                    = $_SESSION['user_id'];
@@ -12,16 +13,12 @@ $selected_date              = $_GET['date'];
 $user_data                  =  mysqli_fetch_array(getUserData($user_id));
 $doctor_data                =  mysqli_fetch_array(getDoctorData($doctor_id));
 
-$sql = "SELECT * FROM DOCTOR WHERE id = '$doctor_id'";
-$result = mysqli_query($conn, $sql);
-$count = mysqli_num_rows($result);
-$rows = mysqli_fetch_array($result);
 // Getting start time and end times from database
-$start_time = $rows['start_time'];
-$end_time   = $rows['end_time'];
-$duration = 30;
-$cleanup = $rows['cleanup_m'];
-$timeslots = timeslots($duration, $cleanup, $start_time, $end_time);
+$start_time                 = $doctor_data['start_time'];
+$end_time                   = $doctor_data['end_time'];
+$duration                   = 30;
+$cleanup                    = $doctor_data['cleanup_m'];
+$timeslots                  = timeslots($duration, $cleanup, $start_time, $end_time);
 
 //Get Booked Times
 //Array: will contain all booked times on selected date and for selected doctor
@@ -37,7 +34,7 @@ if($count_booked_times > 0)
 }
 //Checking for available slots
 $availableSlots = array_diff(array_merge($bookedTimes, $timeslots), array_intersect($bookedTimes, $timeslots));
-
+	
 
 ?>
 
@@ -51,24 +48,28 @@ $availableSlots = array_diff(array_merge($bookedTimes, $timeslots), array_inters
 <body>
 	<div class="container" style="margin-top: 35px;">	
 	 	<form action="" method="POST">
-	 		<!--User Information-->
+
+	 		<!--Start of User Information Segment-->
 	 		<div class="row">
 	 			<div class="col-md-12">
 	 				<h4><b>User's Details</b></h4>
 	 			</div>
 	 			<div class="col-md-4">
 	 				<label>User's Id</label>
-	 				<input type="text" name="user_id" 
-	 					class="form-control"  
-	 					placeholder="<?php echo $user_id; ?>" 
-	 				readonly>
+	 				<input type        = "text" 
+	 					   name        = "user_id"
+	 					   value       = "<?php echo $user_id; ?>" 
+	 					   class       = "form-control"  
+	 					   placeholder = "<?php echo $user_id; ?>" 
+	 					   readonly    = "true"
+	 				>
 	 			</div>
 	 			<div class="col-md-4">
 	 				<label>User's Name</label>
 	 				<input type="text" 
-	 					name="username"
-	 					class="form-control" 
-	 					placeholder="<?php echo $user_data['f_name']." ".$user_data['l_name']; ?>" 
+	 					   name="username"
+	 					   class="form-control" 
+	 					   placeholder="<?php echo $user_data['f_name']." ".$user_data['l_name']; ?>" 
 	 				readonly>
 	 			</div>
 
@@ -81,7 +82,7 @@ $availableSlots = array_diff(array_merge($bookedTimes, $timeslots), array_inters
 		  			readonly>
 		  		</div>
 	 		</div>
-
+	 		<!--End of User Information Segment-->
 
 
 
@@ -90,19 +91,31 @@ $availableSlots = array_diff(array_merge($bookedTimes, $timeslots), array_inters
 	 				<h4><b>Patient Details</b></h4>
 	 			</div>
 		    	<div class="col-md-4">
-		      		<input type="text" class="form-control" placeholder="Patient First name">
+		      		<input type="text"
+		      			   name="patient_fname" 
+		      			   class="form-control" 
+		      			   placeholder="Patient First name"
+		      		>
 		    	</div>
 		    	<div class="col-md-4">
-		      		<input type="text" class="form-control" placeholder="Patient Last name">
+		      		<input type="text" 
+		      			   name="patient_lname" 
+		      			   class="form-control" 
+		      			   placeholder="Patient Last name"
+		      		>
 		    	</div>
 		    	<div class="col-md-4">
-		  			<input type="text" class="form-control" placeholder="Contact">
+		  			<input type="text" 
+		  				   name="patient_contact" 
+		  				   class="form-control" 
+		  				   placeholder="Contact"
+		  			>
 		  		</div>
 		  		
 		  	</div>
 		  	<div class="row" style="margin-top: 35px;">
 		  		<div class="col-md-4">
-		      		<select class="form-control" name="gender">
+		      		<select class="form-control" name="patient_gender">
 		      			<option>Male</option>
 		      			<option>Female</option>
 		      			<option>Other</option>
@@ -110,20 +123,40 @@ $availableSlots = array_diff(array_merge($bookedTimes, $timeslots), array_inters
 		      		</select>
 		    	</div>
 		  		<div class="col-md-4">
-		  			<input type="text" class="form-control" placeholder="Age">
+		  			<input type="text" 
+		  				   name="patient_age"
+		  				   class="form-control" 
+		  				   placeholder="Age"
+		  			>
 		  		</div>
 		  		<div class="col-md-4">
-		      		<select class="form-control" name="gender">
-		      			<option>A+</option>
-		      			<option>A-</option>
-		      			<option>B+</option>
-		      			<option>B-</option>
-		      			<option>AB+</option>
-		      			<option>AB-</option>
-		      			<option>O+</option>
-		      			<option>O-</option>
+		      		<select class="form-control" name="patient_bloodType">
+		      			<option value="A+">A+</option>
+		      			<option value="A-">A-</option>
+		      			<option value="B+">B+</option>
+		      			<option value="B-">B-</option>
+		      			<option value="AB+">AB+</option>
+		      			<option value="AB-">AB-</option>
+		      			<option value="O+">O+</option>
+		      			<option value="O-">O-</option>
 		      		</select>
 		    	</div>		  		
+		  	</div>
+		  	<div class="row" style="margin-top: 35px;">
+		  		<div class="col-md-4">
+		  			<label>Remarks</label>
+		  			<input type="remarks"
+		  				   name="" 
+		  				   class="form-control" 
+		  				   placeholder="Emergency, Report etc"
+		  			>
+		  		</div>
+		  		<div class="col-md-4">
+		  			<label>Short Description Of Porblem</label>
+		  			<div class="md-form">
+					  	<textarea id="" class="md-textarea form-control" rows="4"></textarea>
+					</div>
+		  		</div>
 		  	</div>
 
 		  	<!--Start of Doctor Details Segment-->
@@ -133,11 +166,13 @@ $availableSlots = array_diff(array_merge($bookedTimes, $timeslots), array_inters
 	 			</div>
 		  		<div class="col-md-4">
 	 				<label>Doctor's ID</label>
-		  			<input type="text"
-		  				name="user_contact" 
-		  				class="form-control" 
-		  				placeholder="<?php echo $doctor_data['id']; ?>"
-		  			readonly>
+		  			<input type        ="text"
+		  				   name        ="doctor_id" 
+		  				   value       ="<?php echo $doctor_data['id']; ?>"
+		  				   class       ="form-control" 
+		  				   placeholder ="<?php echo $doctor_data['id']; ?>"
+		  				   readonly    = "true"
+		  			>
 		  		</div>
 		  		<div class="col-md-4">
 	 				<label>Doctor's Name</label>
@@ -152,59 +187,62 @@ $availableSlots = array_diff(array_merge($bookedTimes, $timeslots), array_inters
 		  			<input type="text"
 		  				name="user_contact" 
 		  				class="form-control" 
-		  				placeholder="<?php echo $doctor_data['f_name']." ".$doctor_data['l_name']; ?>"
+		  				placeholder="MBBS, FCPS, FRSH, MD"
 		  			readonly>
 		  		</div>
 		  	</div>
 
+		  	
+		  	<!--End of Doctor Details Segment-->
+
+
+		  	<!--Start of Date and Time Segment-->
 		  	<div class="row" style="margin-top: 35px;">
+		  		<div class="col-md-12">
+	 				<h4><b>Date and Time</b></h4>
+	 			</div>
 		 		<div class="col-md-4">
-		 			<select class="form-control" name="">
+	 				<label>Selected Date</label>
+		  			<input type="text"
+		  				   name="appointment_date" 
+		  				   value="<?php echo $selected_date; ?>"
+		  				   class="form-control" 
+		  				   placeholder="<?php echo $selected_date; ?>"
+		  				   readonly="true"
+		  			>
+		  		</div>
+		 		<div class="col-md-4">
+		 			<label>Available Times</label>
+		 			<select class="form-control" name="appointment_time">
 			 			<?php
 							foreach ($availableSlots as $as) {
 						?>	
-								<option><?php echo $as; ?></option>
-						<?php
-				 			}
-				 		?>
-			 		</select>
-		 		</div>
-		 		<div class="col-md-4">
-		 			<select class="form-control" name="">
-			 			<?php
-							foreach ($availableSlots as $as) {
-						?>	
-								<option><?php echo $as; ?></option>
-						<?php
-				 			}
-				 		?>
-			 		</select>
-		 		</div>
-		 		<div class="col-md-4">
-		 			<select class="form-control" name="">
-			 			<?php
-							foreach ($availableSlots as $as) {
-						?>	
-								<option><?php echo $as; ?></option>
+								<option id="option" value="<?php echo $as; ?>"><?php echo $as; ?></option>
 						<?php
 				 			}
 				 		?>
 			 		</select>
 		 		</div>
 		 	</div>
-			<!--End of Doctor Details Segment-->
+			<!--End of Date and Time Segment-->
 		  	
 
 		  	<div class="row" style="margin-top: 35px;">
 		  		<div class="col-md-2">
-		  			<input class="btn btn-success form-control" name="btn_submit" type="submit" value="Sbmit">
+		  			<input class="btn btn-success form-control" name="btn_submit" type="submit" value="Submit">
 		  		</div>
 		  	</div>
 		</form>	
 	</div>
 	
 	
-	
+	<script type="text/javascript">
+		function show()
+		{
+			var x = document.getElementById("option");
+			alert(x);
+		}
+	</script>
 			
 	
 </body>

@@ -13,7 +13,6 @@
 			//authenticate
 			if(authenticate($_POST["email"],$_POST["password"])){
 				header("Location: user-dashboard");
-				// header("Location: views/test.php");
 			}else{
 				echo "Username password invalid";
 			}

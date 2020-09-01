@@ -1,5 +1,4 @@
 <?php
-// getTimeSlot(IntervalInMinutes, $startTime, $endTime)
 function timeslots($duration, $cleanup, $start, $end){
 	$start = new DateTime($start);
 	$end = new DateTime($end);
@@ -19,5 +18,4 @@ function timeslots($duration, $cleanup, $start, $end){
 }
 
 
-?><!-- 
-." - ".$endPeriod->format("h:i A") -->
+?>

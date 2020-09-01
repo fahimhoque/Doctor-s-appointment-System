@@ -1,28 +1,14 @@
-<!-- <div class="row">
-	 		<div class="col-md-4">
-	 			<select class="form-control" name="specialization">
-		 			<?php
-						//foreach ($timeslots as $ts) {
-					?>	
-					<option><?php //echo $ts; ?></option>
-					<?php
-			 			}
-			 		?>
-		 		</select>
-	 		</div>
-	 		
-	 	</div>
-	 	<h3>Booked Times:</h3>
-	 	<div class="row">
-	 		<div class="col-md-4">
-	 			<select class="form-control" name="">
-		 			<?php
-						//foreach ($bookedTimes as $bt) {
-					?>	
-					<option><?php //echo $bt; ?></option>
-					<?php
-			 			}
-			 		?>
-		 		</select>
-	 		</div>
-	 	</div> -->
+if(isset($_POST['btn_submit']))
+{
+
+	$query_appointment = "INSERT INTO `appointment`
+						(`appointment_date`, `appointment_time`, 
+						`user_id`, `doctor_id`, `patient_fname`, `patient_lname`, 
+						`patient_contact`, `patient_gender`, `patient_age`, `patient_bloodType`) 
+						VALUES 
+						($_POST['selected_date'],$_POST['selected_time'],$_POST['user_id'],
+						$_POST['doctor_id'],$_POST['patient_fname'], $_POST['patient_lname'], 
+						$_POST['patient_contact'],
+						$_POST['patient_gender'],$_POST['patient_age'],$_POST['patient_bloodType'])";
+	$result_appointment = mysqli_query($conn,$query_appointment);
+}

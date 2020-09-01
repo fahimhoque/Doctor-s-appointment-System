@@ -1,5 +1,6 @@
 <?php
 session_start();
+date_default_timezone_set('Asia/Dhaka');
 require('views/config.php');
 
 
@@ -8,7 +9,7 @@ $sql_user = "SELECT * FROM USER WHERE id = '$user_id'";
 $result_user = mysqli_query($conn, $sql_user);
 $rows_user =  mysqli_fetch_array($result_user);
 
-date_default_timezone_set('UTC');
+
 
 //today's appointment for user
 
@@ -57,6 +58,20 @@ if (isset($_POST['btn_find'])){
 	<!--Custom CSS-->
 	<link rel="stylesheet" type="text/css" href="views/user/style/navbar.css">
 	<link rel="stylesheet" type="text/css" href="views/user/style/user-dashboard.css">
+	<style type="text/css">
+		.header{
+			position:relative;
+			left:0;
+			top:0;
+			width: 100%;
+			background-color: black;
+			color: white;
+			text-align: center;
+			font-family:consolas;
+			padding:5px;
+			
+		}
+	</style>
 </head>
 <body>
 	<div class="wui-side-menu open pinned" data-wui-theme="dark">
@@ -104,7 +119,7 @@ if (isset($_POST['btn_find'])){
 		      </a>
 		    </li>
 		    <li style="margin-top: 200px;">
-		      <a href="doctor-logout" class="wui-side-menu-item">
+		      <a href="user-logout" class="wui-side-menu-item">
 		        <i class="fas  fa-power-off"></i>
 		        <span class="box-title">Logout</span> 
 		      </a>
@@ -120,14 +135,18 @@ if (isset($_POST['btn_find'])){
 		
 		
 	 	<div class="wui-content-main">
-	 		<div class="container">
+	 		<!-- <div class="container">
 				<div class="row">
 					<div class="col-md-2" style="margin-top: 20px;">
-						<h4><?php echo $rows_user['id']?></h4>
-						<h4><?php echo $rows_user['f_name']?></h4>
+						<h4><?php //echo $rows_user['id']?></h4>
+						<h4><?php //echo $rows_user['f_name']?></h4>
+						<h4><?php //echo $today?></h4>
 					</div>
 				</div>
-			</div>	 		
+			</div> -->	
+			<div class="text-center" style="margin-left: -150px;">
+				<h1 class="header"><?php echo $rows_user['f_name']." # ".$rows_user['id']?></h1>
+			</div> 		
 			<div class="container" style="margin-top: 50px;">
 				<div class="row">
 
@@ -213,7 +232,7 @@ if (isset($_POST['btn_find'])){
 							<div class="row">
 								<div class="col-md-4 form-group"> <!-- Date input -->
 							        <label class="control-label" for="date">Date</label>
-							        <input class="form-control" type="date" name="date" value="<?php echo date('Y-m-d') ?>">
+							        <input class="form-control" type="date" name="date" value="<?php echo $today; ?>">
 
 							    </div>	
 							    <div class="col-md-4">
