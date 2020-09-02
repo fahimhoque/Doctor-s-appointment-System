@@ -21,6 +21,7 @@ $routes = [
 	'das/user-login' =>                  'views/user/user-login.php',
 	'das/user-logout' =>                 'views/user/user-logout.php',
 	'das/user-signup' =>                 'views/user/user-signup.php',
+	'das/user-profile' =>                'views/user/user-profile.php',
 	'das/user-account-created' =>        'views/user/user-account-created.php',
 	'das/user-dashboard' =>              'views/user/user-dashboard.php',
 	'das/make-appointment' =>            'views/user/make-appointment.php',

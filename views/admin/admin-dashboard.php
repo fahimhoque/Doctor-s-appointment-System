@@ -142,7 +142,7 @@ $total_ticket_count = $count_user_tickets + $count_doctor_tickets;
                 
                 <br>
                 <br>
-                <table class="table table-stripped table-bordered text-center" id="patient-details-table">
+                <table class="table table-bordered text-center" id="patient-details-table">
                     <thead>
                         <th>ID</th>
                         <th>First Name</th>
@@ -157,19 +157,23 @@ $total_ticket_count = $count_user_tickets + $count_doctor_tickets;
 
                     <tbody id="response-patient">
                         <?php  
-                               if($count_patient > 0){
-                                    while($rows_patient = mysqli_fetch_array($result_patient)){
+                               if($count_user > 0){
+                                    while($rows_user = mysqli_fetch_array($result_user)){
 
                                         ?>
                                         <tr>
-                                            <td><?php echo $rows_patient['id'];?> </td>
-                                            <td><?php echo $rows_patient['f_name'];?></td>
-                                            <td><?php echo $rows_patient['l_name'];?></td>
-                                            <td><?php echo $rows_patient['email'];?></td>
-                                            <td><?php echo $rows_patient['contact_number'];?></td>
-                                            <td><?php echo $rows_patient['gender'];?></td>
-                                            <td><input class="patient_view_data" type="button" name="patient_view" value="View" id="<?php echo $rows_patient['id'];?> "></td>
-                                            <td><input class="patient_edit_data" type="button" name="patient_edit" value="Edit" id="<?php echo $rows_patient['id'];?> "></td>
+                                            <td><?php echo $rows_user['id'];?> </td>
+                                            <td><?php echo $rows_user['f_name'];?></td>
+                                            <td><?php echo $rows_user['l_name'];?></td>
+                                            <td><?php echo $rows_user['email'];?></td>
+                                            <td><?php echo $rows_user['contact_number'];?></td>
+                                            <td><?php echo $rows_user['gender'];?></td>
+                                            <td>
+                                                <input class="patient_view_data btn btn-info" type="button" name="patient_view" value="View" id="<?php echo $rows_user['id'];?> ">
+                                            </td>
+                                            <td>
+                                                <input class="patient_edit_data btn btn-success" type="button" name="patient_edit" value="Edit" id="<?php echo $rows_user['id'];?> ">
+                                            </td>
                                             
                                         </tr> 
                                         <?php
@@ -257,7 +261,7 @@ $total_ticket_count = $count_user_tickets + $count_doctor_tickets;
                 
                 <br>
                 <br>
-                <table class="table table-stripped table-bordered text-center" id="doctor-details-table">
+                <table class="table table-striped text-center" id="doctor-details-table">
                     <thead>
                         <th>ID</th>
                         <th>First Name</th>
@@ -283,8 +287,12 @@ $total_ticket_count = $count_user_tickets + $count_doctor_tickets;
                                             <td><?php echo $rows['email'];?></td>
                                             <td><?php echo $rows['contact_number'];?></td>
                                             <td><?php echo $rows['gender'];?></td>
-                                            <td><input class="doctor_view_data" type="button" name="View" value="View" id="<?php echo $rows['id'];?> "></td>
-                                            <td><input class="doctor_edit_data" type="button" name="View" value="Edit" id="<?php echo $rows['id'];?> "></td>
+                                            <td>
+                                                <input class="doctor_view_data btn btn-info" type="button" name="View" value="View" id="<?php echo $rows['id'];?> ">
+                                            </td>
+                                            <td>
+                                                <input class="doctor_edit_data btn btn-success" type="button" name="View" value="Edit" id="<?php echo $rows['id'];?> ">
+                                            </td>
                                             
                                         </tr> 
                                         <?php

@@ -16,20 +16,19 @@
 		$patient_bloodtype = $_POST['patient_bloodType'];
 
 		if(!$hasError){
-			if(make_appointment($appointment_date,$appointment_time,$user_id, $doctor_id, $patient_fname, $patient_lname, $patient_contact, $patient_gender,
+			if(make_appointment($appointment_date, $appointment_time, $user_id, $doctor_id, $patient_fname, $patient_lname, $patient_contact, $patient_gender,
 								$patient_age, $patient_bloodtype)){
 				header("Location: user-dashboard");
 			}else
 			{
-				// echo '<script>alert("Something went  wrong")</script>';
-				header("Location: user-dashboard");
+				echo '<script>alert("Something went  wrong")</script>';
+				
 			}
 		}
 	}
 	
 	function make_appointment($appointment_date,$appointment_time,$user_id, $doctor_id, $patient_fname, $patient_lname, $patient_contact, $patient_gender,
 								$patient_age, $patient_bloodtype){
-		// $password = md5($password);
 		$query = "INSERT INTO 
 					appointment (appointment_date, appointment_time,
 								user_id, doctor_id, patient_fname, 
@@ -42,6 +41,7 @@
 						    '$patient_age', '$patient_bloodtype') ";
 
 		execute($query);
+		return true;
 		
 	}
 

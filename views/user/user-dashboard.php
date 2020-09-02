@@ -14,7 +14,7 @@ $rows_user =  mysqli_fetch_array($result_user);
 //today's appointment for user
 
 $today = date("Y-m-d");
-$sql_todays_appointment = "SELECT * FROM APPOINTMENT WHERE user_id = '$user_id' AND appointment_date = '$today'";
+$sql_todays_appointment = "SELECT * FROM today_appointment WHERE user_id = '$user_id' AND appointment_date = '$today'";
 $result_todays_appointment = mysqli_query($conn, $sql_todays_appointment);
 $count_todays_appointment = mysqli_num_rows($result_todays_appointment);
 
@@ -107,13 +107,13 @@ if (isset($_POST['btn_find'])){
 		      </a>
 		    </li>
 		    <li>
-		      <a href="doctor-support" class="wui-side-menu-item">
+		      <a href="" class="wui-side-menu-item">
 		        <i class="fas fa-tags"></i>
 		        <span class="box-title">Support</span> 
 		      </a>
 		    </li>
 		    <li>
-		      <a href="doctor-profile" class="wui-side-menu-item">
+		      <a href="user-profile" class="wui-side-menu-item">
 		        <i class="fas fa-user"></i>
 		        <span class="box-title">Profile</span> 
 		      </a>
@@ -145,13 +145,15 @@ if (isset($_POST['btn_find'])){
 				</div>
 			</div> -->	
 			<div class="text-center" style="margin-left: -150px;">
-				<h1 class="header"><?php echo $rows_user['f_name']." # ".$rows_user['id']?></h1>
+				<h3 class="header">
+					<?php echo $rows_user['f_name']." ".$rows_user['l_name']." # ".$rows_user['id']?>
+				</h3>
 			</div> 		
 			<div class="container" style="margin-top: 50px;">
 				<div class="row">
 
 					<!-- Today's appointment -->
-					<div class="col-md-6" style="margin-left: -120px; margin-right: 80px;">
+					<div class="col-md-6" style="margin-left: -150px; margin-right: 120px;">
 						
 						<h4>Today's Appointment</h4>
 						<form action="" method="POST">
@@ -185,8 +187,8 @@ if (isset($_POST['btn_find'])){
 			                    ?>
 			                    <tr>
 			                         <td><?php echo $rows_todays_appointment['appointment_id'];?></td>
-			                         <td><?php echo $rows_todays_appointment['appointment_date'];?></td>
-			                         <td><?php echo $rows_todays_appointment['doctor_id'];?></td>
+			                         <td><?php echo date('h:i A', strtotime($rows_todays_appointment['appointment_time']));?></td>
+			                         <td><?php echo "Dr. ".$rows_todays_appointment['f_name']." ".$rows_todays_appointment['l_name'];?></td>
 			                         <td><?php echo $rows_todays_appointment['patient_fname']." ".$rows_todays_appointment['patient_lname'];?></td>
 			                    </tr> 
 			                    <?php
@@ -224,6 +226,9 @@ if (isset($_POST['btn_find'])){
 										<option>Medicine</option>
 										<option>Neurologist</option>
 										<option>Dentist</option>
+										<option value="Allergists">Allergy Specialist</option>
+										<option value="Cardiologists">Cardiologists</option>
+
 									</select>
 								</div>
 								
@@ -249,6 +254,7 @@ if (isset($_POST['btn_find'])){
 			                        <th>Last Name</th>
 			                        <th>Start Time</th>
 			                        <th>End Time</th>
+			                        <th>Location</th>
 			                        <th>Action</th>
 			                        
 			                    </thead>
@@ -265,6 +271,7 @@ if (isset($_POST['btn_find'])){
 			                                            <td><?php echo $rows['l_name'];?></td>
 			                                            <td><?php echo date('h A', strtotime($rows['start_time'])) ;?></td>
 														<td><?php echo date('h A', strtotime($rows['end_time'])) ;?></td>
+														<td><?php echo $rows['city']; ?></td>
 			                                            <td>
 			                                            	<a target="_blank" 
 			                                            	href="make-appointment?doctor_id=<?php echo $rows['id'];?>&date=<?php echo $_POST['date']; ?>">
@@ -273,8 +280,6 @@ if (isset($_POST['btn_find'])){
 			                                            </td>
 			                                        </tr> 
 			                                        <?php
-			        
-
 			                                    }
 			                                }
 			                        ?>

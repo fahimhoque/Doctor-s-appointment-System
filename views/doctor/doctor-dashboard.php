@@ -128,7 +128,7 @@ $count_doctor_tickets = mysqli_num_rows($result_doctor_tickets);
                             		<i class="fa fa-users fa-fw bg-primary"></i>
                             		<div class="info">
                               			<h3><?php echo $count_appointments_today; ?></h3> <span>Appointments</span>
-                              			<p>Total appointments today</p>
+                              			<p>Appointments today</p>
                             		</div>
                           		</div>
                        		</div>
@@ -159,16 +159,17 @@ $count_doctor_tickets = mysqli_num_rows($result_doctor_tickets);
             	
             	<div class="container-fluid">
             		<div class="row">
-            			<div class="col-md-4">
+            			<div class="col-md-6">
             				<h5>Today's Appointment</h5>
             				<h6>Date : <?php echo $today?></h6>
-            				<table class="table table-stripped table-bordered text-center" id="patient-details-table">
+            				<table class="table table-bordered text-center" id="patient-details-table">
 			            		<thead>
 			            			<th>First Name</th>
 			            			<th>Last Name</th>
 			            			<th>Gender</th>
 			            			<th>Age</th>
 			            			<th>Blood Type</th>
+			            			<th>Time</th>
 			            		</thead>
 			            		<tbody id="response-patient">
 			                        <?php  
@@ -182,6 +183,7 @@ $count_doctor_tickets = mysqli_num_rows($result_doctor_tickets);
 			                                            <td><?php echo $rows_appointment_today['patient_gender'];?></td>
 			                                            <td><?php echo $rows_appointment_today['patient_age'];?></td>
 			                                            <td><?php echo $rows_appointment_today['patient_bloodType'];?></td>
+			                                            <td><?php echo date('h:i A', strtotime($rows_appointment_today['appointment_time']));?></td>
 			                                        </tr> 
 			                        <?php
 			        
