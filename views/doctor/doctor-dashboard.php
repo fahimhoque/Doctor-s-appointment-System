@@ -1,32 +1,18 @@
 <?php
 session_start();
-require('views/config.php');
-$doctor_id = $_SESSION['doctor_id'];
+date_default_timezone_set("Asia/Dhaka");
 require_once 'views/config.php';
 require_once 'controller/doctor/getDoctorDetails.php';
 
-date_default_timezone_set("Asia/Dhaka");
+//Getting Date
 $today = date("Y-m-d");
+//Getting Doctor ID from SESSION
+$doctor_id = $_SESSION['doctor_id'];
 
-$doctor_data            =  mysqli_fetch_array(getDoctorData($doctor_id));
-
-
-//appointments today
-$sql_appointments_today = "SELECT * FROM appointment WHERE doctor_id = '$doctor_id' AND appointment_date = '$today'";
-$appointments_today     = mysqli_query($conn, $sql_appointments_today);
-$count_appointments_today = mysqli_num_rows($appointments_today);
-
-
-//appointments
-$sql_appointments = "SELECT * FROM appointment WHERE doctor_id = '$doctor_id'";
-$appointments = mysqli_query($conn, $sql_appointments);
-$count_appointments = mysqli_num_rows($appointments);
-
-
-//show doctor tickets
-$sql_doctor_tickets = "SELECT * FROM doctor_tickets WHERE doctor_id = '$doctor_id'";
-$result_doctor_tickets = mysqli_query($conn, $sql_doctor_tickets);
-$count_doctor_tickets = mysqli_num_rows($result_doctor_tickets);
+$doctor_data            = mysqli_fetch_array(getDoctorData($doctor_id));
+$appointments_today     = mysqli_num_rows(getTodaysAppointment($doctor_id, $today));
+$total_appointments     = mysqli_num_rows(getTotalAppointment($doctor_id));
+$total_tickets          = mysqli_num_rows(getDoctorTickets($doctor_id));
 
 
 
@@ -126,7 +112,7 @@ $count_doctor_tickets = mysqli_num_rows($result_doctor_tickets);
                           		<div class="box">
                             		<i class="fa fa-users fa-fw bg-primary"></i>
                             		<div class="info">
-                              			<h3><?php echo $count_appointments_today; ?></h3> <span>Appointments</span>
+                              			<h3><?php echo $appointments_today; ?></h3> <span>Appointments</span>
                               			<p>Appointments today</p>
                             		</div>
                           		</div>
@@ -135,7 +121,7 @@ $count_doctor_tickets = mysqli_num_rows($result_doctor_tickets);
                           		<div class="box">
 		                            <i class="fa fa-medkit fa-fw danger"></i>
 		                            <div class="info">
-	                              		<h3><?php echo $count_appointments; ?></h3> <span>Appointments</span>
+	                              		<h3><?php echo $total_appointments; ?></h3> <span>Appointments</span>
 	                              		<p>Total appointmetns</p>
 	                            	</div>
                           		</div>
@@ -144,7 +130,7 @@ $count_doctor_tickets = mysqli_num_rows($result_doctor_tickets);
                           		<div class="box">
                             		<i class="fa fa-tags fa-fw success"></i>
                             		<div class="info">
-		                              	<h3><?php echo $count_doctor_tickets; ?></h3> <span>Tickets Filed</span>
+		                              	<h3><?php echo $total_tickets; ?></h3> <span>Tickets Filed</span>
 		                              	<p>1 Issue solved</p>
                             		</div>
                           		</div>
@@ -172,17 +158,29 @@ $count_doctor_tickets = mysqli_num_rows($result_doctor_tickets);
 			            		</thead>
 			            		<tbody id="response-patient">
 			                        <?php  
-			                               if($count_appointments_today > 0){
-			                                    while($rows_appointment_today = mysqli_fetch_array($appointments_today)){
+			                               if($appointments_today > 0){
+			                                    while($rows_appointments_today = mysqli_fetch_array(getTodaysAppointment($doctor_id, $today))){
 
 			                        ?>
 			                                        <tr>  
-			                                            <td><?php echo $rows_appointment_today['patient_fname'];?></td>
-			                                            <td><?php echo $rows_appointment_today['patient_lname'];?></td>
-			                                            <td><?php echo $rows_appointment_today['patient_gender'];?></td>
-			                                            <td><?php echo $rows_appointment_today['patient_age'];?></td>
-			                                            <td><?php echo $rows_appointment_today['patient_bloodType'];?></td>
-			                                            <td><?php echo date('h:i A', strtotime($rows_appointment_today['appointment_time']));?></td>
+			                                            <td>
+			                                            	<?php echo $rows_appointments_today['patient_fname'];?>
+			                                            </td>
+			                                            <td>
+			                                            	<?php echo $rows_appointments_today['patient_lname'];?>
+			                                            </td>
+			                                            <td>
+			                                            	<?php echo $rows_appointments_today['patient_gender'];?>
+			                                            </td>
+			                                            <td>
+			                                            	<?php echo $rows_appointments_today['patient_age'];?>
+			                                            </td>
+			                                            <td>
+			                                            	<?php echo $rows_appointments_today['patient_bloodType'];?>
+			                                            </td>
+			                                            <td>
+			                                            	<?php echo date('h:i A', strtotime($rows_appointments_today['appointment_time']));?>
+			                                            </td>
 			                                        </tr> 
 			                        <?php
 			        
