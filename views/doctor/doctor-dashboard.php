@@ -1,15 +1,14 @@
 <?php
 session_start();
 require('views/config.php');
-$doctor_id = $_SESSION['id'];
-
+$doctor_id = $_SESSION['doctor_id'];
+require_once 'views/config.php';
+require_once 'controller/doctor/getDoctorDetails.php';
 
 date_default_timezone_set("Asia/Dhaka");
 $today = date("Y-m-d");
 
-$sql = "SELECT * FROM doctor";
-$result = mysqli_query($conn, $sql);
-$count_doctor = mysqli_num_rows($result);
+$doctor_data            =  mysqli_fetch_array(getDoctorData($doctor_id));
 
 
 //appointments today
@@ -117,7 +116,7 @@ $count_doctor_tickets = mysqli_num_rows($result_doctor_tickets);
 
 	 	<div class="wui-content-main">
 
-		    <h4><?php echo "Welcome Dr. ".$_SESSION['f_name']." ".$_SESSION['l_name']; ?></h4>
+		    <h4><?php echo "Welcome Dr. ".$doctor_data['f_name']." ".$doctor_data['l_name']; ?></h4>
 		    <div id="events"></div>
 		    <div id="show-statistics">
                 <section class="statistics">

@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	require_once 'models/config.php';
 	$name          ="";
 	$err_name      ="";
@@ -22,7 +23,7 @@
 		// $password = md5($password);
 		$query = "SELECT * FROM `doctor` WHERE email='$email' and password='$password'";
 		$doctor=getArray($query);
-		$_SESSION['user_id'] = $doctor['id'];
+		$_SESSION['doctor_id'] = $doctor['id'];
 		return $doctor;
 	}
 
