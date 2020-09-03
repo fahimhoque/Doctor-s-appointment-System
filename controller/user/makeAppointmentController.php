@@ -36,7 +36,7 @@
 								patient_lname,patient_contact, patient_gender, 
 								patient_age, patient_bloodtype) 
 
-					VALUES ('$appointment_date', 'booked_on', STR_TO_DATE('$appointment_time', '%l:%i %p' ),
+					VALUES ('$appointment_date', '$booked_on', STR_TO_DATE('$appointment_time', '%l:%i %p' ),
 							'$user_id', '$doctor_id', '$patient_fname',
 						    '$patient_lname', '$patient_contact', '$patient_gender',
 						    '$patient_age', '$patient_bloodtype') ";
