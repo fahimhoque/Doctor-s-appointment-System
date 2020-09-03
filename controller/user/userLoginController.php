@@ -14,7 +14,7 @@
 			if(authenticate($_POST["email"],$_POST["password"])){
 				header("Location: user-dashboard");
 			}else{
-				echo "Username password invalid";
+				echo '<script>alert("Invalid login credentials")</script>';
 			}
 		}
 	}
