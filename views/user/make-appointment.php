@@ -1,11 +1,13 @@
 <?php
 session_start();
+date_default_timezone_set('Asia/Dhaka');
 require_once 'views/config.php';
 require_once 'views/user/time-slot.php';
 require_once 'controller/user/getUserDetails.php';
 require_once 'controller/doctor/getDoctorDetails.php';
 require_once 'controller/user/makeAppointmentController.php';
 
+$today = date("Y-m-d");
 
 $user_id                    = $_SESSION['user_id'];
 $doctor_id                  = $_GET['doctor_id'];
@@ -79,6 +81,15 @@ $availableSlots = array_diff(array_merge($bookedTimes, $timeslots), array_inters
 		  				name="user_contact" 
 		  				class="form-control" 
 		  				placeholder="<?php echo $user_data['contact_number']; ?>"
+		  			readonly>
+		  		</div>
+		  		<div class="col-md-4">
+	 				<label>Booked On</label>
+		  			<input type="text"
+		  				   name="booked_on" 
+		  				   value="<?php echo $today; ?>"
+		  				   class="form-control" 
+		  				   placeholder="<?php echo $today; ?>"
 		  			readonly>
 		  		</div>
 	 		</div>
