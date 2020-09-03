@@ -1,36 +1,7 @@
 <?php  
-require('views/config.php');
-session_start();
+require_once 'models/config.php';
+require_once 'controller/doctor/doctorLoginController.php';
 
-if (isset($_POST['btn_login'])){
-	
-	// Assigning POST values to variables.
-	$email = $_POST['email_doctor'];
-	$password = $_POST['password_doctor'];
-
-	// CHECK FOR THE RECORD FROM TABLE
-	$query = "SELECT * FROM `doctor` WHERE email='$email' and password='$password'";
-	 
-	$result = mysqli_query($conn, $query) or die(mysqli_error($conn));
-	$count = mysqli_num_rows($result);
-
-	if ($count == 1){
-		
-    	$rows_doctor = mysqli_fetch_array($result);
-		
-		$_SESSION['id']     = $rows_doctor['id'];
-		$_SESSION['f_name'] = $rows_doctor['f_name'];
-		$_SESSION['l_name'] = $rows_doctor['l_name'];
-
-		header('Location: doctor-dashboard');
-	}
-	
-	else{
-	echo "<script type='text/javascript'>alert('Invalid Login Credentials')</script>";
-	echo "Invalid Login Credentials";
-
-	}
-}
 ?>
 
 

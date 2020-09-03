@@ -10,8 +10,8 @@
 		//validation
 		if(!$hasError){
 			//authenticate
-			if(authenticate($_POST["email"],$_POST["password"])){
-				header("Location: user-dashboard");
+			if(authenticate($_POST["email_doctor"],$_POST["password_doctor"])){
+				header("Location: doctor-dashboard");
 			}else{
 				echo "Username password invalid";
 			}
@@ -20,9 +20,10 @@
 	
 	function authenticate($email,$password){
 		// $password = md5($password);
-		$query = "SELECT * FROM `user` WHERE email='$email' and password='$password'";
-		$user=getArray($query);
-		return $user;
+		$query = "SELECT * FROM `doctor` WHERE email='$email' and password='$password'";
+		$doctor=getArray($query);
+		$_SESSION['user_id'] = $doctor['id'];
+		return $doctor;
 	}
 
 ?>
