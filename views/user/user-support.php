@@ -61,7 +61,7 @@ $user_data                  = mysqli_fetch_array(getUserData($user_id));
                         </div>
                     </div>
 
-                    <a href="support-log" class="clearfix pull-right btn btn-info btn-lg active" role="button">Your Support Tickets</a>
+                    <a href="user-support-log" class="clearfix pull-right btn btn-info btn-lg active" role="button">Your Support Tickets</a>
                     <br>
                     <p>Before sending a query please note :</p>
                     <ul>
