@@ -158,7 +158,7 @@ $total_tickets          = mysqli_num_rows(getDoctorTickets($doctor_id));
 			            		</thead>
 			            		<tbody id="response-patient">
 			                        <?php  
-			                               if($appointments_today > 0){
+			                               if(isset($appointments_today) && $appointments_today > 0){
 			                                    while($rows_appointments_today = mysqli_fetch_array(getTodaysAppointment($doctor_id, $today))){
 
 			                        ?>
