@@ -1,11 +1,9 @@
 <?php
 session_start();
-require('views/config.php');
-$doctor_id = $_SESSION['id'];
-
-
 date_default_timezone_set("Asia/Dhaka");
-$today = date("Y-m-d");
+require('views/config.php');
+
+$doctor_id = $_SESSION['doctor_id'];
 
 
 
@@ -14,7 +12,7 @@ $today = date("Y-m-d");
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Settings: <?php echo "Dr. ".$_SESSION['f_name']." ".$_SESSION['l_name']; ?></title>
+	<title>Settings:</title>
 	<script src="views/doctor/scripts/navbar.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">

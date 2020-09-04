@@ -8,6 +8,7 @@ $parsed_url = parse_url($path, PHP_URL_PATH);
 $routes = [
 	'das'=>                              'views/index.php',
 	'das/find-blood' =>                  'views/blood/find-blood.php',
+	'das/faq'=>                          'views/faq.php',
 
 
 	//all admin related routes

@@ -73,7 +73,7 @@ $appointments_today = mysqli_num_rows($result);
 		      </a>
 		    </li>
 		    <li>
-		      <a href="doctor-profile" class="wui-side-menu-item">
+		      <a href="doctor-profile?id=<?php echo $doctor_id?>" class="wui-side-menu-item">
 		        <i class="fas fa-user"></i>
 		        <span class="box-title">Profile</span> 
 		      </a>
@@ -146,7 +146,7 @@ $appointments_today = mysqli_num_rows($result);
             			<div class="col-md-6">
             				<h5>Today's Appointment</h5>
             				<h6>Date : <?php echo $today?></h6>
-            				<table class="table table-bordered text-center" id="patient-details-table">
+            				<table class="table table-borderless table-hover" id="patient-details-table">
 			            		<thead>
 			            			<th>First Name</th>
 			            			<th>Last Name</th>
