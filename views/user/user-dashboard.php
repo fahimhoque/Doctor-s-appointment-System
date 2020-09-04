@@ -108,7 +108,7 @@ if (isset($_POST['btn_find'])){
 		      </a>
 		    </li>
 		    <li>
-		      <a href="" class="wui-side-menu-item">
+		      <a href="user-support?user=<?php echo $user_id ?>" class="wui-side-menu-item">
 		        <i class="fas fa-tags"></i>
 		        <span class="box-title">Support</span> 
 		      </a>

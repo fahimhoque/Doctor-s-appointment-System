@@ -18,7 +18,7 @@ $routes = [
 	//'das/fetch-doctor-details' =>      'views/admin/fetch-doctor-details.php',
 
 
-	//all patient related routes
+	//all user related routes
 	'das/user-login' =>                  'views/user/user-login.php',
 	'das/user-logout' =>                 'views/user/user-logout.php',
 	'das/user-signup' =>                 'views/user/user-signup.php',
@@ -27,6 +27,7 @@ $routes = [
 	'das/user-dashboard' =>              'views/user/user-dashboard.php',
 	'das/make-appointment' =>            'views/user/make-appointment.php',
 	'das/user-support' =>                'views/user/user-support.php', 
+	'das/user-support-log' =>            'views/user/user-support-log.php',        
 	'das/find-doctor' =>                 'views/user/find-doctor.php',
 
 
