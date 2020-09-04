@@ -1,7 +1,6 @@
 <?php
 session_start();
 date_default_timezone_set("Asia/Dhaka");
-require_once 'views/config.php';
 require_once 'controller/doctor/getDoctorDetails.php';
 
 //Getting Date
@@ -10,11 +9,11 @@ $today = date("Y-m-d");
 $doctor_id = $_SESSION['doctor_id'];
 
 $doctor_data            = mysqli_fetch_array(getDoctorData($doctor_id));
-$appointments_today     = mysqli_num_rows(getTodaysAppointment($doctor_id, $today));
 $total_appointments     = mysqli_num_rows(getTotalAppointment($doctor_id));
 $total_tickets          = mysqli_num_rows(getDoctorTickets($doctor_id));
 
-
+$result = getTodaysAppointment($doctor_id, $today);
+$appointments_today = mysqli_num_rows($result);
 
 ?>
 
@@ -159,7 +158,7 @@ $total_tickets          = mysqli_num_rows(getDoctorTickets($doctor_id));
 			            		<tbody id="response-patient">
 			                        <?php  
 			                               if(isset($appointments_today) && $appointments_today > 0){
-			                                    while($rows_appointments_today = mysqli_fetch_array(getTodaysAppointment($doctor_id, $today))){
+			                                    while($rows_appointments_today = mysqli_fetch_array($result)){
 
 			                        ?>
 			                                        <tr>  
