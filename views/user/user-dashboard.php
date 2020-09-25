@@ -135,16 +135,7 @@ if (isset($_POST['btn_find'])){
 		
 		
 		
-	 	<div class="wui-content-main">
-	 		<!-- <div class="container">
-				<div class="row">
-					<div class="col-md-2" style="margin-top: 20px;">
-						<h4><?php //echo $rows_user['id']?></h4>
-						<h4><?php //echo $rows_user['f_name']?></h4>
-						<h4><?php //echo $today?></h4>
-					</div>
-				</div>
-			</div> -->	
+	 	<div class="wui-content-main">	
 			<div class="text-center" style="margin-left: -150px;">
 				<h3 class="header">
 					<?php echo $rows_user['f_name']." ".$rows_user['l_name']." # ".$rows_user['id']?>
@@ -218,7 +209,8 @@ if (isset($_POST['btn_find'])){
 							<div class="form-group row">
 								<div class="col-md-4">
 									<label class="my-1 mr-2">City</label>
-									<input type="text" class="form-control mb-2 mr-sm-2" name="City">
+									<input type="text" class="form-control mb-2 mr-sm-2" id="search-box" name="City">
+									<div id="suggestion-box"></div>
 								</div>
 								<div class="col-md-4">
 									<label class="my-1 mr-2 selectpicker">Type</label>
@@ -244,6 +236,7 @@ if (isset($_POST['btn_find'])){
 							    <div class="col-md-4">
 									<label class="my-1 mr-2 selectpicker">Search</label>
 									<input class="btn btn-success form-control" name="btn_find" type="submit" value="Find">
+
 								</div>
 							</div>
 						</form>
@@ -299,8 +292,35 @@ if (isset($_POST['btn_find'])){
 	<div class="wui-overlay"></div>
 	
 	
+	
+
+
+
+
 	<script type="text/javascript">
-		
+		// AJAX call for autocomplete 
+		$(document).ready(function(){
+			$("#search-box").keyup(function(){
+				$.ajax({
+				type: "POST",
+				url: "controller/user/readDistrict.php",
+				data:'keyword='+$(this).val(),
+				beforeSend: function(){
+					$("#search-box").css("background","#FFF url(LoaderIcon.gif) no-repeat 165px");
+				},
+				success: function(data){
+					$("#suggesstion-box").show();
+					$("#suggesstion-box").html(data);
+					$("#search-box").css("background","#FFF");
+				}
+				});
+			});
+		});
+		//To select country name
+		function selectCountry(val) {
+		$("#search-box").val(val);
+		$("#suggesstion-box").hide();
+		}
 	</script>
 </body>
 </html>
